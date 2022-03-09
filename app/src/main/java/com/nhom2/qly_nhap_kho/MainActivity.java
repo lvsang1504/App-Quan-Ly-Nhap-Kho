@@ -4,17 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nhom2.qly_nhap_kho.adapter.PhieuNhapAdapter;
 import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
 import com.nhom2.qly_nhap_kho.model.Kho;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recycleView;
     PhieuNhapAdapter phieuNhapAdapter;
     TextView txtTongPhieuNhap;
+    FloatingActionButton floatingActionButton;
 
     List<PhieuNhap> arrayPhieuNhap = new ArrayList<>();
 
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         spinnerKho = (Spinner) findViewById(R.id.spinner1);
         recycleView = findViewById(R.id.recycleView);
         txtTongPhieuNhap = findViewById(R.id.txtTongPhieuNhap);
+        floatingActionButton= findViewById(R.id.floatingActionButton);
 
 
         ArrayList<Kho> arrayKho = new ArrayList<Kho>();
@@ -112,41 +119,7 @@ public class MainActivity extends AppCompatActivity {
         spinnerKho.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                arrayPhieuNhap.clear();
-
-                if (spinnerKho.getSelectedItem().toString().equals("Tất cả")) {
-
-                    Cursor dataPhieuNhap = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap ");
-
-                    PhieuNhap phieuNhap;
-                    while (dataPhieuNhap.moveToNext()) {
-                        phieuNhap = new PhieuNhap(Integer.valueOf(dataPhieuNhap.getString(0)), dataPhieuNhap.getString(1), dataPhieuNhap.getString(2));
-                        arrayPhieuNhap.add(phieuNhap);
-                    }
-
-                    txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
-                } else {
-                    Cursor dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho WHERE TenKho='" + spinnerKho.getSelectedItem().toString() + "'");
-                    String ma = "";
-                    while (dataKho.moveToNext()) {
-                        ma = dataKho.getString(0);
-
-                    }
-                    Cursor dataPhieuNhap = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap WHERE MaKho = '" + ma + "'");
-
-                    PhieuNhap phieuNhap;
-                    while (dataPhieuNhap.moveToNext()) {
-                        phieuNhap = new PhieuNhap(Integer.valueOf(dataPhieuNhap.getString(0)), dataPhieuNhap.getString(1), dataPhieuNhap.getString(2));
-                        arrayPhieuNhap.add(phieuNhap);
-                    }
-                    txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
-                }
-
-
-                recycleView.setHasFixedSize(true);
-                recycleView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
-                phieuNhapAdapter = new PhieuNhapAdapter(MainActivity.this, arrayPhieuNhap, phieuNhapListener);
-                recycleView.setAdapter(phieuNhapAdapter);
+                actionGetData();
             }
 
             @Override
@@ -154,6 +127,51 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogInsert();
+            }
+        });
+    }
+
+    public void actionGetData(){
+        arrayPhieuNhap.clear();
+
+        if (spinnerKho.getSelectedItem().toString().equals("Tất cả")) {
+
+            Cursor dataPhieuNhap = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap ");
+
+            PhieuNhap phieuNhap;
+            while (dataPhieuNhap.moveToNext()) {
+                phieuNhap = new PhieuNhap(Integer.valueOf(dataPhieuNhap.getString(0)), dataPhieuNhap.getString(1), dataPhieuNhap.getString(2));
+                arrayPhieuNhap.add(phieuNhap);
+            }
+
+            txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
+        } else {
+            Cursor dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho WHERE TenKho='" + spinnerKho.getSelectedItem().toString() + "'");
+            String ma = "";
+            while (dataKho.moveToNext()) {
+                ma = dataKho.getString(0);
+
+            }
+            Cursor dataPhieuNhap = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap WHERE MaKho = '" + ma + "'");
+
+            PhieuNhap phieuNhap;
+            while (dataPhieuNhap.moveToNext()) {
+                phieuNhap = new PhieuNhap(Integer.valueOf(dataPhieuNhap.getString(0)), dataPhieuNhap.getString(1), dataPhieuNhap.getString(2));
+                arrayPhieuNhap.add(phieuNhap);
+            }
+            txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
+        }
+
+
+        recycleView.setHasFixedSize(true);
+        recycleView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+        phieuNhapAdapter = new PhieuNhapAdapter(MainActivity.this, arrayPhieuNhap, phieuNhapListener);
+        recycleView.setAdapter(phieuNhapAdapter);
     }
 
     @Override
@@ -169,4 +187,96 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
+    public void dialogUpdate(int soPhieu,String ngayLap,String maKho){
+
+        Dialog dialog=new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_suaphieunhap);
+
+        //anh xa
+        EditText editSoPhieu=(EditText) dialog.findViewById(R.id.editSoPhieu);
+        EditText editNgayLap=(EditText) dialog.findViewById(R.id.editNgayLap);
+        EditText editMaKho=(EditText) dialog.findViewById(R.id.editMaKho);
+        Button btnHoanTat=(Button) dialog.findViewById(R.id.btnHoanTat);
+        Button btnXoa=(Button) dialog.findViewById(R.id.btnXoa);
+
+        //set du lieu
+        editSoPhieu.setText(soPhieu+"");
+        editNgayLap.setText(ngayLap);
+        editMaKho.setText(maKho);
+
+        //bat su kien nut bam
+        btnHoanTat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String ngayLapMoi= String.valueOf(editNgayLap.getText());
+                String maKhoMoi= String.valueOf(editMaKho.getText());
+                if(TextUtils.isEmpty(ngayLapMoi)||TextUtils.isEmpty(maKhoMoi)){
+                    Toast.makeText(MainActivity.this, "Nội dung cần sửa chưa được nhập", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    return;
+                }
+                nhapKhoHelper.QueryData("UPDATE PhieuNhap SET NgayLap='"+ngayLapMoi+"',MaKho='"+maKhoMoi+"' WHERE SoPhieu='"+soPhieu+"'");
+                dialog.dismiss();
+                actionGetData();
+            }
+        });
+
+        btnXoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nhapKhoHelper.QueryData("DELETE FROM PhieuNhap WHERE SoPhieu='"+soPhieu+"'");
+                dialog.dismiss();
+                actionGetData();
+            }
+        });
+
+        dialog.show();
+    }
+    public void dialogInsert(){
+        Dialog dialog=new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_themphieunhap);
+
+        EditText editSoPhieu2= (EditText) dialog.findViewById(R.id.editSoPhieu2);
+        EditText editNgayLap2= (EditText) dialog.findViewById(R.id.editNgayLap2);
+        EditText editMaKho2= (EditText) dialog.findViewById(R.id.editMaKho2);
+        Button btnThem=(Button) dialog.findViewById(R.id.btnThem);
+        Button btnHuy=(Button) dialog.findViewById(R.id.btnHuy);
+
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String soPhieuMoi= String.valueOf(editSoPhieu2.getText());
+                String ngayLapMoi= String.valueOf(editNgayLap2.getText());
+                String maKhoMoi= String.valueOf(editMaKho2.getText());
+
+
+                if(TextUtils.isEmpty(soPhieuMoi)||TextUtils.isEmpty(ngayLapMoi)||TextUtils.isEmpty(maKhoMoi)){
+                    Toast.makeText(MainActivity.this, "Nội dung cần thêm chưa được nhập", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    return;
+                }
+                nhapKhoHelper.QueryData("INSERT INTO PhieuNhap VALUES ('"+soPhieuMoi+"','"+ngayLapMoi+"', '"+maKhoMoi+"')");
+                dialog.dismiss();
+                actionGetData();
+
+            }
+        });
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+
+        dialog.show();
+    }
+
+
 }

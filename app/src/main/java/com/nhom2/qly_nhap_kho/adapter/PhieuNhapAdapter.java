@@ -1,5 +1,6 @@
 package com.nhom2.qly_nhap_kho.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nhom2.qly_nhap_kho.MainActivity;
 import com.nhom2.qly_nhap_kho.R;
 import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
 import com.nhom2.qly_nhap_kho.model.PhieuNhap;
@@ -19,11 +21,11 @@ import java.util.List;
 
 public class PhieuNhapAdapter extends RecyclerView.Adapter<PhieuNhapViewHolder> {
 
-    Context context;
+    MainActivity context;
     List<PhieuNhap> list;
     PhieuNhapListener listener;
 
-    public PhieuNhapAdapter(Context context, List<PhieuNhap> list, PhieuNhapListener listener) {
+    public PhieuNhapAdapter(MainActivity context, List<PhieuNhap> list, PhieuNhapListener listener) {
         this.context = context;
         this.list = list;
         this.listener = listener;
@@ -45,6 +47,16 @@ public class PhieuNhapAdapter extends RecyclerView.Adapter<PhieuNhapViewHolder> 
             public void onClick(View v) {
                 Log.d("ddd", String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu));
                 listener.onPhieuNhapClicked(String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu));
+            }
+        });
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                context.dialogUpdate(Integer.parseInt(String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu)),
+                        String.valueOf(list.get(holder.getAdapterPosition()).NgayLap),
+                        String.valueOf(list.get(holder.getAdapterPosition()).MaKho));
+
+                return false;
             }
         });
     }
