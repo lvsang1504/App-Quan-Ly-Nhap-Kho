@@ -4,20 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.nhom2.qly_nhap_kho.adapter.TableViewAdapter;
-import com.nhom2.qly_nhap_kho.model.MovieModel;
+import com.nhom2.qly_nhap_kho.dao.TableData;
+import com.nhom2.qly_nhap_kho.model.ChiTietPhieuNhap;
+import com.nhom2.qly_nhap_kho.model.VatTu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ChiTietPhieuNhapActivity extends AppCompatActivity {
+
+    NhapKhoHelper nhapKhoHelper;
+    TextView txtTitle;
 
 
     @Override
@@ -25,10 +29,16 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_phieu_nhap);
 
+        String id = getIntent().getStringExtra("id");
+
+        txtTitle = findViewById(R.id.txtTitle);
+        txtTitle.setText("Thông tin vật tư nhập kho của phiếu số " + id);
+
+        nhapKhoHelper = new NhapKhoHelper(this);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewDeliveryProductList);
 
-        TableViewAdapter adapter = new TableViewAdapter(getMovieList());
+        TableViewAdapter adapter = new TableViewAdapter(getList(id));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -38,20 +48,37 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
     }
 
 
-    private List getMovieList() {
-        List movieList = new ArrayList<>();
+    private List getList(String id) {
+        List<TableData> list = new ArrayList<>();
 
-        movieList.add(new MovieModel(1, "Pirates of the Caribbean: On Stranger Tides", 2011, 378));
-        movieList.add(new MovieModel(2, "Avengers: Age of Ultron", 2015, 365));
-        movieList.add(new MovieModel(3, "Avengers: Infinity War", 2018, 316));
-        movieList.add(new MovieModel(4, "Pirates of the Caribbean: At World's End", 2007, 300));
-        movieList.add(new MovieModel(5, "Justice League", 2017, 300));
-        movieList.add(new MovieModel(6, "Solo: A Star Wars Story", 2018, 275));
-        movieList.add(new MovieModel(7, "John Carter", 2012, 264));
-        movieList.add(new MovieModel(8, "Batman v Superman: Dawn of Justice", 2016, 263));
-        movieList.add(new MovieModel(9, "Star Wars: The Last Jedi", 2017, 263));
-        movieList.add(new MovieModel(10, "Tangled", 2010, 260));
+        Cursor dataCTPN = nhapKhoHelper.GetData("SELECT * FROM ChiTietPhieuNhap WHERE SoPhieu = " + id);
 
-        return movieList;
+        ChiTietPhieuNhap chiTietPhieuNhap;
+        while (dataCTPN.moveToNext()) {
+            chiTietPhieuNhap = new ChiTietPhieuNhap(
+                    Integer.valueOf(dataCTPN.getString(0)),
+                    dataCTPN.getString(1),
+                    dataCTPN.getString(2),
+                    Integer.valueOf(dataCTPN.getString(3)));
+            Log.d("aaa",chiTietPhieuNhap.MaVT);
+            if (chiTietPhieuNhap != null) {
+                Cursor dataVT = nhapKhoHelper.GetData("SELECT * FROM VatTu WHERE MaVT = '" + chiTietPhieuNhap.MaVT + "'");
+                VatTu vatTu;
+                if (dataVT.moveToNext()) {
+                    vatTu = new VatTu(dataVT.getString(0), dataVT.getString(1), dataVT.getString(2));
+                    TableData tableData = new TableData(
+                            vatTu.MaVT, vatTu.TenVt, chiTietPhieuNhap.DVT, chiTietPhieuNhap.SoLuong
+                    );
+
+                    list.add(tableData);
+                }
+            }
+        }
+
+        return list;
+    }
+
+    public void btnClick(View view) {
+        onBackPressed();
     }
 }

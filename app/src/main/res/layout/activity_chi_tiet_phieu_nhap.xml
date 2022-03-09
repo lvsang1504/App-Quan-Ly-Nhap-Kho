@@ -1,52 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:background="#009688"
     tools:context=".ChiTietPhieuNhapActivity">
+
 
     <RelativeLayout
         android:id="@+id/llViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="2">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_back"
+            android:onClick="btnClick"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_toRightOf="@id/btnBack"
+            android:id="@+id/txtTitle"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="16dp"
+            android:gravity="center"
             android:text="Table RecyclerView"
-            android:textSize="18sp" />
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
-    <HorizontalScrollView
+    <ScrollView
+        android:layout_weight="5"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_below="@+id/llViewTitle"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDeliveryProductList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:nestedScrollingEnabled="false"
             tools:listitem="@layout/table_list_item" />
 
-    </HorizontalScrollView>
+    </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <LinearLayout
+        android:layout_weight="3"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_feed" />
+        android:gravity="center"
+        android:layout_height="0dp">
+        <RadioGroup
+            android:layout_weight="3"
+            android:layout_below="@id/scrollView"
+            android:layout_margin="20dp"
+            android:id="@+id/myRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/grey"
+            android:checkedButton="@+id/sound"
+            >
 
-</RelativeLayout>
+            <RadioButton
+                android:id="@+id/sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:outlineSpotShadowColor="@color/black"
+                android:text="In thông tin vật tư theo kho" />
+
+            <RadioButton
+                android:id="@+id/vibration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="In chi tiết phiếu nhập kho" />
+
+
+        </RadioGroup>
+
+        <Button
+            android:background="@drawable/boder_spinner"
+            android:text="In báo cáo"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

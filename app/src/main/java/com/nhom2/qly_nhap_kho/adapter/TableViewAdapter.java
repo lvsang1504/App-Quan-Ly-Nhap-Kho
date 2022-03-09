@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.nhom2.qly_nhap_kho.R;
-import com.nhom2.qly_nhap_kho.model.MovieModel;
+import com.nhom2.qly_nhap_kho.dao.TableData;
 
 import java.util.List;
 
@@ -23,10 +23,10 @@ import java.util.List;
 
 public class TableViewAdapter extends RecyclerView.Adapter {
 
-    private List movieList;
+    private List<TableData> list;
 
-    public TableViewAdapter(List movieList) {
-        this.movieList = movieList;
+    public TableViewAdapter(List<TableData> list) {
+        this.list = list;
     }
 
     @NonNull
@@ -48,47 +48,47 @@ public class TableViewAdapter extends RecyclerView.Adapter {
 
         if (rowPos == 0) {
 
-            rowViewHolder.txtRank.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtMovieName.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtYear.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtCost.setBackgroundResource(R.drawable.table_header_cell_bg);
+            rowViewHolder.txtMaVt.setBackgroundResource(R.drawable.table_header_cell_bg);
+            rowViewHolder.txtTenVT.setBackgroundResource(R.drawable.table_header_cell_bg);
+            rowViewHolder.txtDvt.setBackgroundResource(R.drawable.table_header_cell_bg);
+            rowViewHolder.txtSL.setBackgroundResource(R.drawable.table_header_cell_bg);
 
-            rowViewHolder.txtRank.setText("Rank");
-            rowViewHolder.txtMovieName.setText("Name");
-            rowViewHolder.txtYear.setText("Year");
-            rowViewHolder.txtCost.setText("Budget");
+            rowViewHolder.txtMaVt.setText("Mã VT");
+            rowViewHolder.txtTenVT.setText("Tên VT");
+            rowViewHolder.txtDvt.setText("Đơn vị tính");
+            rowViewHolder.txtSL.setText("Số lượng");
         } else {
-            MovieModel modal = (MovieModel) movieList.get(rowPos - 1);
+            TableData modal = list.get(rowPos - 1);
 
-            rowViewHolder.txtRank.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtMovieName.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtYear.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtCost.setBackgroundResource(R.drawable.table_content_cell_bg);
+            rowViewHolder.txtMaVt.setBackgroundResource(R.drawable.table_content_cell_bg);
+            rowViewHolder.txtTenVT.setBackgroundResource(R.drawable.table_content_cell_bg);
+            rowViewHolder.txtDvt.setBackgroundResource(R.drawable.table_content_cell_bg);
+            rowViewHolder.txtSL.setBackgroundResource(R.drawable.table_content_cell_bg);
 
-            rowViewHolder.txtRank.setText(modal.getRank() + "");
-            rowViewHolder.txtMovieName.setText(modal.getMovieName());
-            rowViewHolder.txtYear.setText(modal.getYear() + "");
-            rowViewHolder.txtCost.setText(modal.getBudgetInMillions() + "");
+            rowViewHolder.txtMaVt.setText(modal.maVT + "");
+            rowViewHolder.txtTenVT.setText(modal.tenVT);
+            rowViewHolder.txtDvt.setText(modal.DVT + "");
+            rowViewHolder.txtSL.setText(modal.soLuong + "");
         }
     }
 
     @Override
     public int getItemCount() {
-        return movieList.size() + 1;
+        return list.size() + 1;
     }
 
     public class RowViewHolder extends RecyclerView.ViewHolder {
-        TextView txtRank;
-        TextView txtMovieName;
-        TextView txtYear;
-        TextView txtCost;
+        TextView txtMaVt;
+        TextView txtTenVT;
+        TextView txtDvt;
+        TextView txtSL;
 
         RowViewHolder(View itemView) {
             super(itemView);
-            txtRank = itemView.findViewById(R.id.txtRank);
-            txtMovieName = itemView.findViewById(R.id.txtMovieName);
-            txtYear = itemView.findViewById(R.id.txtYear);
-            txtCost = itemView.findViewById(R.id.txtCost);
+            txtMaVt = itemView.findViewById(R.id.txtRank);
+            txtTenVT = itemView.findViewById(R.id.txtMovieName);
+            txtDvt = itemView.findViewById(R.id.txtYear);
+            txtSL = itemView.findViewById(R.id.txtCost);
         }
     }
 }
