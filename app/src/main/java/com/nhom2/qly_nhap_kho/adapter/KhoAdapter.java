@@ -1,9 +1,11 @@
-package com.nhom2.qly_nhap_kho;
+package com.nhom2.qly_nhap_kho.adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.nhom2.qly_nhap_kho.model.Kho;
 
 import java.util.List;
 

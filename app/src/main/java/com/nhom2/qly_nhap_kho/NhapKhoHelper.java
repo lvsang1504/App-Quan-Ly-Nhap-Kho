@@ -8,8 +8,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class NhapKhoHelper extends SQLiteOpenHelper {
-    public NhapKhoHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+
+    private static final String DB_NAME = "NhapKho.sqlite";
+
+    private static final int DB_VERSION = 1;
+
+
+    public NhapKhoHelper(@Nullable Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     //Truy van khong tra ket qua

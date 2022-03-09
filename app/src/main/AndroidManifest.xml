@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Qly_nhap_kho">
         <activity
-            android:name=".MainActivity2"
+            android:name=".ChiTietPhieuNhapActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -1,4 +1,4 @@
-package com.nhom2.qly_nhap_kho;
+package com.nhom2.qly_nhap_kho.model;
 
 public class Kho {
     private String MaKho,TenKho;
