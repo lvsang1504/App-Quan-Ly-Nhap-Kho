@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nhom2.qly_nhap_kho.MainActivity;
 import com.nhom2.qly_nhap_kho.R;
 import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
+import com.nhom2.qly_nhap_kho.model.Kho;
 import com.nhom2.qly_nhap_kho.model.PhieuNhap;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class PhieuNhapAdapter extends RecyclerView.Adapter<PhieuNhapViewHolder> 
             @Override
             public void onClick(View v) {
                 Log.d("ddd", String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu));
-                listener.onPhieuNhapClicked(String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu));
+                listener.onPhieuNhapClicked(String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu), list.get(holder.getAdapterPosition()));
             }
         });
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {

@@ -2,61 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_dialog"
     android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CẬP NHẬT THÔNG TIN"
         android:textSize="25dp"
+        android:textAlignment="center"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:padding="5dp"/>
+        android:layout_margin="8dp"
+        android:padding="8dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Số phiếu"
-        android:padding="5dp"/>
+        android:layout_margin="8dp"/>
 
     <EditText
+        android:background="@drawable/border_edit"
+        android:layout_margin="8dp"
         android:id="@+id/editSoPhieu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:editable="false"
+        android:padding="8dp"
         />
     <TextView
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ngày lập"
-        android:padding="5dp"/>
+        android:text="Ngày lập"/>
     <EditText
+        android:background="@drawable/border_edit"
+        android:layout_margin="8dp"
         android:id="@+id/editNgayLap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"/>
+        android:padding="8dp"/>
     <TextView
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mã kho"
-        android:padding="5dp"/>
+        android:text="Mã kho"/>
     <EditText
+        android:background="@drawable/border_edit"
+        android:layout_margin="8dp"
         android:id="@+id/editMaKho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"/>
+        android:padding="8dp"/>
     <LinearLayout
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="2"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:orientation="horizontal">
         <Button
+            android:layout_margin="8dp"
             android:id="@+id/btnHoanTat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Hoàn tất"/>
         <Button
+            android:layout_margin="8dp"
             android:id="@+id/btnXoa"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

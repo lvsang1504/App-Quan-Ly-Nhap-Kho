@@ -1,6 +1,8 @@
 package com.nhom2.qly_nhap_kho.model;
 
-public class Kho {
+import java.io.Serializable;
+
+public class Kho implements Serializable {
     private String MaKho,TenKho;
 
     public Kho(String maKho, String tenKho) {

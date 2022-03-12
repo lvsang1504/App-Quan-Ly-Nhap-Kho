@@ -1,6 +1,8 @@
 package com.nhom2.qly_nhap_kho.model;
 
-public class PhieuNhap {
+import java.io.Serializable;
+
+public class PhieuNhap implements Serializable {
     public int SoPhieu;
     public String NgayLap;
     public String MaKho;

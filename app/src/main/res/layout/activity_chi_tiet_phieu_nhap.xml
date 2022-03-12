@@ -97,6 +97,7 @@
         </RadioGroup>
 
         <Button
+            android:id="@+id/buttonReport"
             android:background="@drawable/boder_spinner"
             android:text="In báo cáo"
             android:textAllCaps="false"

@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/background_dialog.xml" value="0.25794871794871793" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/boder_spinner.xml" value="0.26614583333333336" />
+        <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/border_edit.xml" value="0.25794871794871793" />
+        <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/ic_add.xml" value="0.25794871794871793" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/table_content_cell_bg.xml" value="0.261025641025641" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/table_header_cell_bg.xml" value="0.261025641025641" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/table_list_item.xml" value="0.261025641025641" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/layout/activity_chi_tiet_phieu_nhap.xml" value="0.23357664233576642" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Qly_nhap_kho/app/src/main/res/layout/dialog_suaphieunhap.xml" value="0.14266304347826086" />
+        <entry key="..\:/Qly_nhap_kho/app/src/main/res/layout/dialog_themphieunhap.xml" value="0.14266304347826086" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/layout/list_phieu_nhap.xml" value="0.25" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/layout/table_header_cell_bg.xml" value="0.13360507246376813" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/layout/table_list_item.xml" value="0.13360507246376813" />

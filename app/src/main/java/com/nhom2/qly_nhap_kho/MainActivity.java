@@ -1,14 +1,18 @@
 package com.nhom2.qly_nhap_kho;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -39,17 +43,22 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
 
     List<PhieuNhap> arrayPhieuNhap = new ArrayList<>();
+    Kho kho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActivityCompat.requestPermissions(this, new String[]
+                        {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                PackageManager.PERMISSION_GRANTED);
+
 
         spinnerKho = (Spinner) findViewById(R.id.spinner1);
         recycleView = findViewById(R.id.recycleView);
         txtTongPhieuNhap = findViewById(R.id.txtTongPhieuNhap);
-        floatingActionButton= findViewById(R.id.floatingActionButton);
+        floatingActionButton = findViewById(R.id.floatingActionButton);
 
 
         ArrayList<Kho> arrayKho = new ArrayList<Kho>();
@@ -136,12 +145,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void actionGetData(){
+    public void actionGetData() {
         arrayPhieuNhap.clear();
 
         if (spinnerKho.getSelectedItem().toString().equals("Tất cả")) {
 
             Cursor dataPhieuNhap = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap ");
+            kho = new Kho("Tất cả", "Tất cả");
 
             PhieuNhap phieuNhap;
             while (dataPhieuNhap.moveToNext()) {
@@ -153,9 +163,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Cursor dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho WHERE TenKho='" + spinnerKho.getSelectedItem().toString() + "'");
             String ma = "";
+
             while (dataKho.moveToNext()) {
                 ma = dataKho.getString(0);
-
+                kho = new Kho(ma, dataKho.getString(1));
             }
             Cursor dataPhieuNhap = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap WHERE MaKho = '" + ma + "'");
 
@@ -170,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
         recycleView.setHasFixedSize(true);
         recycleView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+
         phieuNhapAdapter = new PhieuNhapAdapter(MainActivity.this, arrayPhieuNhap, phieuNhapListener);
         recycleView.setAdapter(phieuNhapAdapter);
     }
@@ -182,27 +194,37 @@ public class MainActivity extends AppCompatActivity {
 
     private final PhieuNhapListener phieuNhapListener = new PhieuNhapListener() {
         @Override
-        public void onPhieuNhapClicked(String id) {
-            Intent intent = new Intent(MainActivity.this, ChiTietPhieuNhapActivity.class).putExtra("id", id);
+        public void onPhieuNhapClicked(String id, PhieuNhap phieuNhap) {
+
+            Intent intent = new Intent(MainActivity.this, ChiTietPhieuNhapActivity.class);
+
+            Bundle bundle = new Bundle();
+
+            bundle.putString("id", id);
+            bundle.putSerializable("phieuNhap", phieuNhap);
+            bundle.putSerializable("kho", kho);
+
+            intent.putExtra("data", bundle);
+
             startActivity(intent);
         }
     };
 
-    public void dialogUpdate(int soPhieu,String ngayLap,String maKho){
+    public void dialogUpdate(int soPhieu, String ngayLap, String maKho) {
 
-        Dialog dialog=new Dialog(this);
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_suaphieunhap);
 
         //anh xa
-        EditText editSoPhieu=(EditText) dialog.findViewById(R.id.editSoPhieu);
-        EditText editNgayLap=(EditText) dialog.findViewById(R.id.editNgayLap);
-        EditText editMaKho=(EditText) dialog.findViewById(R.id.editMaKho);
-        Button btnHoanTat=(Button) dialog.findViewById(R.id.btnHoanTat);
-        Button btnXoa=(Button) dialog.findViewById(R.id.btnXoa);
+        EditText editSoPhieu = (EditText) dialog.findViewById(R.id.editSoPhieu);
+        EditText editNgayLap = (EditText) dialog.findViewById(R.id.editNgayLap);
+        EditText editMaKho = (EditText) dialog.findViewById(R.id.editMaKho);
+        Button btnHoanTat = (Button) dialog.findViewById(R.id.btnHoanTat);
+        Button btnXoa = (Button) dialog.findViewById(R.id.btnXoa);
 
         //set du lieu
-        editSoPhieu.setText(soPhieu+"");
+        editSoPhieu.setText(soPhieu + "");
         editNgayLap.setText(ngayLap);
         editMaKho.setText(maKho);
 
@@ -211,14 +233,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String ngayLapMoi= String.valueOf(editNgayLap.getText());
-                String maKhoMoi= String.valueOf(editMaKho.getText());
-                if(TextUtils.isEmpty(ngayLapMoi)||TextUtils.isEmpty(maKhoMoi)){
+                String ngayLapMoi = String.valueOf(editNgayLap.getText());
+                String maKhoMoi = String.valueOf(editMaKho.getText());
+                if (TextUtils.isEmpty(ngayLapMoi) || TextUtils.isEmpty(maKhoMoi)) {
                     Toast.makeText(MainActivity.this, "Nội dung cần sửa chưa được nhập", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     return;
                 }
-                nhapKhoHelper.QueryData("UPDATE PhieuNhap SET NgayLap='"+ngayLapMoi+"',MaKho='"+maKhoMoi+"' WHERE SoPhieu='"+soPhieu+"'");
+                nhapKhoHelper.QueryData("UPDATE PhieuNhap SET NgayLap='" + ngayLapMoi + "',MaKho='" + maKhoMoi + "' WHERE SoPhieu='" + soPhieu + "'");
                 dialog.dismiss();
                 actionGetData();
             }
@@ -227,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nhapKhoHelper.QueryData("DELETE FROM PhieuNhap WHERE SoPhieu='"+soPhieu+"'");
+                nhapKhoHelper.QueryData("DELETE FROM PhieuNhap WHERE SoPhieu='" + soPhieu + "'");
                 dialog.dismiss();
                 actionGetData();
             }
@@ -235,31 +257,32 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.show();
     }
-    public void dialogInsert(){
-        Dialog dialog=new Dialog(this);
+
+    public void dialogInsert() {
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_themphieunhap);
 
-        EditText editSoPhieu2= (EditText) dialog.findViewById(R.id.editSoPhieu2);
-        EditText editNgayLap2= (EditText) dialog.findViewById(R.id.editNgayLap2);
-        EditText editMaKho2= (EditText) dialog.findViewById(R.id.editMaKho2);
-        Button btnThem=(Button) dialog.findViewById(R.id.btnThem);
-        Button btnHuy=(Button) dialog.findViewById(R.id.btnHuy);
+        EditText editSoPhieu2 = (EditText) dialog.findViewById(R.id.editSoPhieu2);
+        EditText editNgayLap2 = (EditText) dialog.findViewById(R.id.editNgayLap2);
+        EditText editMaKho2 = (EditText) dialog.findViewById(R.id.editMaKho2);
+        Button btnThem = (Button) dialog.findViewById(R.id.btnThem);
+        Button btnHuy = (Button) dialog.findViewById(R.id.btnHuy);
 
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String soPhieuMoi= String.valueOf(editSoPhieu2.getText());
-                String ngayLapMoi= String.valueOf(editNgayLap2.getText());
-                String maKhoMoi= String.valueOf(editMaKho2.getText());
+                String soPhieuMoi = String.valueOf(editSoPhieu2.getText());
+                String ngayLapMoi = String.valueOf(editNgayLap2.getText());
+                String maKhoMoi = String.valueOf(editMaKho2.getText());
 
 
-                if(TextUtils.isEmpty(soPhieuMoi)||TextUtils.isEmpty(ngayLapMoi)||TextUtils.isEmpty(maKhoMoi)){
+                if (TextUtils.isEmpty(soPhieuMoi) || TextUtils.isEmpty(ngayLapMoi) || TextUtils.isEmpty(maKhoMoi)) {
                     Toast.makeText(MainActivity.this, "Nội dung cần thêm chưa được nhập", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     return;
                 }
-                nhapKhoHelper.QueryData("INSERT INTO PhieuNhap VALUES ('"+soPhieuMoi+"','"+ngayLapMoi+"', '"+maKhoMoi+"')");
+                nhapKhoHelper.QueryData("INSERT INTO PhieuNhap VALUES ('" + soPhieuMoi + "','" + ngayLapMoi + "', '" + maKhoMoi + "')");
                 dialog.dismiss();
                 actionGetData();
 
@@ -272,7 +295,6 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
 
 
         dialog.show();
