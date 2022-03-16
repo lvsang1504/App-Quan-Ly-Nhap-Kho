@@ -58,10 +58,10 @@
             android:layout_margin="8dp"
             android:text="Mã kho" />
 
-        <EditText
-            android:id="@+id/editMaKho2"
+        <Spinner
+            android:id="@+id/spinnerMaKho2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_margin="8dp"
             android:background="@drawable/border_edit"
             android:padding="5dp" />

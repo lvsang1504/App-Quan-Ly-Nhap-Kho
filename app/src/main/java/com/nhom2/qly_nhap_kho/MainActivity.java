@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -219,14 +220,25 @@ public class MainActivity extends AppCompatActivity {
         //anh xa
         EditText editSoPhieu = (EditText) dialog.findViewById(R.id.editSoPhieu);
         EditText editNgayLap = (EditText) dialog.findViewById(R.id.editNgayLap);
-        EditText editMaKho = (EditText) dialog.findViewById(R.id.editMaKho);
         Button btnHoanTat = (Button) dialog.findViewById(R.id.btnHoanTat);
         Button btnXoa = (Button) dialog.findViewById(R.id.btnXoa);
+
+        //them du lieu vao spinner
+        Spinner spinnerMaKho=dialog.findViewById(R.id.spinnerMaKho);
+        Cursor dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho");
+        ArrayList<String> arrayMaKhoTam = new ArrayList<String>();
+        Kho khoTam;
+        while (dataKho.moveToNext()) {
+            khoTam = new Kho(dataKho.getString(0), dataKho.getString(1));
+            arrayMaKhoTam.add(khoTam.getMaKho());
+        }
+        ArrayAdapter arrayAdapterTam = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayMaKhoTam);
+        spinnerMaKho.setAdapter(arrayAdapterTam);
 
         //set du lieu
         editSoPhieu.setText(soPhieu + "");
         editNgayLap.setText(ngayLap);
-        editMaKho.setText(maKho);
+        spinnerMaKho.setSelection(arrayAdapterTam.getPosition(maKho));
 
         //bat su kien nut bam
         btnHoanTat.setOnClickListener(new View.OnClickListener() {
@@ -234,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String ngayLapMoi = String.valueOf(editNgayLap.getText());
-                String maKhoMoi = String.valueOf(editMaKho.getText());
+                String maKhoMoi = String.valueOf(spinnerMaKho.getSelectedItem().toString());
                 if (TextUtils.isEmpty(ngayLapMoi) || TextUtils.isEmpty(maKhoMoi)) {
                     Toast.makeText(MainActivity.this, "Nội dung cần sửa chưa được nhập", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -265,23 +277,59 @@ public class MainActivity extends AppCompatActivity {
 
         EditText editSoPhieu2 = (EditText) dialog.findViewById(R.id.editSoPhieu2);
         EditText editNgayLap2 = (EditText) dialog.findViewById(R.id.editNgayLap2);
-        EditText editMaKho2 = (EditText) dialog.findViewById(R.id.editMaKho2);
         Button btnThem = (Button) dialog.findViewById(R.id.btnThem);
         Button btnHuy = (Button) dialog.findViewById(R.id.btnHuy);
+
+        //them du lieu vao spinner
+        Spinner spinnerMaKho2=dialog.findViewById(R.id.spinnerMaKho2);
+        Cursor dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho");
+        ArrayList<Kho> arrayTam = new ArrayList<Kho>();
+        ArrayList<String> arrayTenKhoTam = new ArrayList<String>();
+        Kho khoTam;
+        while (dataKho.moveToNext()) {
+            khoTam = new Kho(dataKho.getString(0), dataKho.getString(1));
+            arrayTam.add(khoTam);
+            arrayTenKhoTam.add(khoTam.getTenKho());
+        }
+        ArrayAdapter arrayAdapterTam = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTenKhoTam);
+        spinnerMaKho2.setAdapter(arrayAdapterTam);
 
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String soPhieuMoi = String.valueOf(editSoPhieu2.getText());
+                int soPhieuMoi =0;
                 String ngayLapMoi = String.valueOf(editNgayLap2.getText());
-                String maKhoMoi = String.valueOf(editMaKho2.getText());
-
-
-                if (TextUtils.isEmpty(soPhieuMoi) || TextUtils.isEmpty(ngayLapMoi) || TextUtils.isEmpty(maKhoMoi)) {
+                String maKhoMoi = String.valueOf(arrayTam.get(spinnerMaKho2.getSelectedItemPosition()).getMaKho());
+                if (TextUtils.isEmpty(String.valueOf(editSoPhieu2.getText())) || TextUtils.isEmpty(ngayLapMoi) || TextUtils.isEmpty(maKhoMoi)) {
                     Toast.makeText(MainActivity.this, "Nội dung cần thêm chưa được nhập", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+
                     return;
                 }
+                //kiem tra chu cai
+                try {
+                    soPhieuMoi = Integer.parseInt(String.valueOf(editSoPhieu2.getText()));
+                }catch (Exception e){
+                    Toast.makeText(MainActivity.this, "Số phiếu là một số nguyên", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //kiem tra trung
+                Cursor dataPhieuNhap = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap");
+                ArrayList<PhieuNhap> arrayPhieuNhap = new ArrayList<PhieuNhap>();
+                PhieuNhap phieuNhapTam;
+                while (dataPhieuNhap.moveToNext()) {
+                    phieuNhapTam = new PhieuNhap(dataPhieuNhap.getInt(0), dataPhieuNhap.getString(1),dataPhieuNhap.getString(2));
+                    arrayPhieuNhap.add(phieuNhapTam);
+                }
+
+                for (int i = 0; i < arrayPhieuNhap.size(); i++) {
+                    if(soPhieuMoi==arrayPhieuNhap.get(i).getSoPhieu()){
+                        Toast.makeText(MainActivity.this, "Số phiếu bị trùng", Toast.LENGTH_SHORT).show();
+
+                        return;
+                    }
+                }
+
+
                 nhapKhoHelper.QueryData("INSERT INTO PhieuNhap VALUES ('" + soPhieuMoi + "','" + ngayLapMoi + "', '" + maKhoMoi + "')");
                 dialog.dismiss();
                 actionGetData();

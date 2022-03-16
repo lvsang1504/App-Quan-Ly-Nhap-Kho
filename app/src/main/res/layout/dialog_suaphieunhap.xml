@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:editable="false"
         />
     <TextView
         android:layout_margin="8dp"
@@ -45,12 +46,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mã kho"/>
-    <EditText
+    <Spinner
         android:background="@drawable/border_edit"
         android:layout_margin="8dp"
-        android:id="@+id/editMaKho"
+        android:id="@+id/spinnerMaKho"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:padding="8dp"/>
     <LinearLayout
         android:layout_margin="8dp"

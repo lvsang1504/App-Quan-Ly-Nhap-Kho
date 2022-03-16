@@ -12,4 +12,28 @@ public class PhieuNhap implements Serializable {
         NgayLap = ngayLap;
         MaKho = maKho;
     }
+
+    public void setSoPhieu(int soPhieu) {
+        SoPhieu = soPhieu;
+    }
+
+    public void setNgayLap(String ngayLap) {
+        NgayLap = ngayLap;
+    }
+
+    public void setMaKho(String maKho) {
+        MaKho = maKho;
+    }
+
+    public int getSoPhieu() {
+        return SoPhieu;
+    }
+
+    public String getNgayLap() {
+        return NgayLap;
+    }
+
+    public String getMaKho() {
+        return MaKho;
+    }
 }

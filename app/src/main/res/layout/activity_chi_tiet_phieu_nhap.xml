@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="#009688"
+    android:background="#00BCD4"
     tools:context=".ChiTietPhieuNhapActivity">
 
 
@@ -81,14 +81,14 @@
             >
 
             <RadioButton
-                android:id="@+id/sound"
+                android:id="@+id/rdInVatTu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:outlineSpotShadowColor="@color/black"
                 android:text="In thông tin vật tư theo kho" />
 
             <RadioButton
-                android:id="@+id/vibration"
+                android:id="@+id/rdInPhieuNhap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="In chi tiết phiếu nhập kho" />
