@@ -21,9 +21,12 @@
             android:id="@+id/btnBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_back"
-            android:onClick="btnClick"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="btnClick"
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_toRightOf="@id/btnBack"

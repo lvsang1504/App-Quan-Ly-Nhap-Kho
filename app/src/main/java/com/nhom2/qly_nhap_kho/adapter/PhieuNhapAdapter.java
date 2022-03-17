@@ -17,16 +17,17 @@ import com.nhom2.qly_nhap_kho.R;
 import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
 import com.nhom2.qly_nhap_kho.model.Kho;
 import com.nhom2.qly_nhap_kho.model.PhieuNhap;
+import com.nhom2.qly_nhap_kho.model.PhieuNhapActivity;
 
 import java.util.List;
 
 public class PhieuNhapAdapter extends RecyclerView.Adapter<PhieuNhapViewHolder> {
 
-    MainActivity context;
+    PhieuNhapActivity context;
     List<PhieuNhap> list;
     PhieuNhapListener listener;
 
-    public PhieuNhapAdapter(MainActivity context, List<PhieuNhap> list, PhieuNhapListener listener) {
+    public PhieuNhapAdapter(PhieuNhapActivity context, List<PhieuNhap> list, PhieuNhapListener listener) {
         this.context = context;
         this.list = list;
         this.listener = listener;
