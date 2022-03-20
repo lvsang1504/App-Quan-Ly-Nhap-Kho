@@ -126,10 +126,10 @@ public class MainActivity extends AppCompatActivity {
 
     private List<GridItem> getListData() {
         List<GridItem> list = new ArrayList<GridItem>();
-        GridItem gridItem = new GridItem("Kho", "ic_store");
-        GridItem gridItem1 = new GridItem("Phiếu nhập", "ic_phieu_nhap");
-        GridItem gridItem2 = new GridItem("Vật tư", "ic_vat_tu");
-        GridItem gridItem3 = new GridItem("Báo cáo", "ic_bao_cao");
+        GridItem gridItem = new GridItem("Kho", "warehouse_64px");
+        GridItem gridItem1 = new GridItem("Phiếu nhập", "receipt_64px");
+        GridItem gridItem2 = new GridItem("Vật tư", "commodity_64px");
+        GridItem gridItem3 = new GridItem("Báo cáo", "presentation_64px");
 
         list.add(gridItem);
         list.add(gridItem1);
