@@ -1,7 +1,5 @@
 package com.nhom2.qly_nhap_kho.adapter;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nhom2.qly_nhap_kho.MainActivity;
 import com.nhom2.qly_nhap_kho.R;
 import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
-import com.nhom2.qly_nhap_kho.model.Kho;
 import com.nhom2.qly_nhap_kho.model.PhieuNhap;
 import com.nhom2.qly_nhap_kho.model.PhieuNhapActivity;
 

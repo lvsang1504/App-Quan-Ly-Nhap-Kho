@@ -10,4 +10,30 @@ public class VatTu {
         TenVt = tenVt;
         XuatXu = xuatXu;
     }
+
+
+
+    public void setMaVT(String maVT) {
+        MaVT = maVT;
+    }
+
+    public void setTenVt(String tenVt) {
+        TenVt = tenVt;
+    }
+
+    public void setXuatXu(String xuatXu) {
+        XuatXu = xuatXu;
+    }
+
+    public String getMaVT() {
+        return MaVT;
+    }
+
+    public String getTenVt() {
+        return TenVt;
+    }
+
+    public String getXuatXu() {
+        return XuatXu;
+    }
 }

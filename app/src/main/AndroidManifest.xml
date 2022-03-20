@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Qly_nhap_kho">
         <activity
+            android:name=".KhoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietBaoCao3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietBaoCao2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietBaoCao1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ListBaoCaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VatTuActivity"
+            android:exported="false" />
+        <activity
             android:name=".model.PhieuNhapActivity"
             android:exported="false" />
         <activity

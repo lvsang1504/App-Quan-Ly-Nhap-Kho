@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewBaoCao"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="#EAEAEA"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="2"
+                android:background="@drawable/ic_feed"/>
+
+            <TextView
+                android:id="@+id/txtNoiDungBaoCao"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:text="Nội dung"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:layout_weight="8"
+                android:gravity="left"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
