@@ -1,11 +1,20 @@
 package com.nhom2.qly_nhap_kho;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.ListActivity;
 import android.database.Cursor;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,17 +33,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KhoActivity extends AppCompatActivity {
-    NhapKhoHelper nhapKhoHelper;
+    NhapKhoHelper  nhapKhoHelper;
     KhoAdapter khoAdapter;
     RecyclerView recyclerViewKho;
     List<Kho> arrayKho = new ArrayList<>();
     Kho kho;
     FloatingActionButton floatingActionButtonKho;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kho);
-        nhapKhoHelper=new NhapKhoHelper(this);
+        nhapKhoHelper =  NhapKhoHelper.getInstance(this);
         anhXa();
         actionGetData();
 
@@ -44,12 +54,96 @@ public class KhoActivity extends AppCompatActivity {
                 dialogInsert();
             }
         });
+
+
     }
+
+    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
+        private Paint paint = new Paint();
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            Toast.makeText(KhoActivity.this, "on Move", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            Toast.makeText(KhoActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+            //Remove swiped item from list and notify the RecyclerView
+            int position = viewHolder.getAdapterPosition();
+
+            Cursor data = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap WHERE MaKho='" + arrayKho.get(position).getMaKho() + "'");
+            while (data.moveToNext()) {
+                Toast.makeText(KhoActivity.this, "Kho có phiếu nhập không thể xóa", Toast.LENGTH_SHORT).show();
+                khoAdapter.notifyDataSetChanged();
+                return;
+            }
+
+            nhapKhoHelper.QueryData("DELETE FROM Kho WHERE MaKho='" + arrayKho.get(position).getMaKho() + "'");
+            arrayKho.remove(position);
+            khoAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+//            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+            float translationX = dX;
+            View itemView = viewHolder.itemView;
+            float height = (float)itemView.getBottom() - (float)itemView.getTop();
+
+            if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX <= 0) // Swiping Left
+            {
+                translationX = -Math.min(-dX, height * 2);
+                paint.setColor(Color.RED);
+                RectF background = new RectF((float)itemView.getRight() + translationX, (float)itemView.getTop(), (float)itemView.getRight(), (float)itemView.getBottom());
+                c.drawRect(background, paint);
+
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(50);
+                paint.setTypeface(Typeface.DEFAULT_BOLD);
+                paint.setTextAlign(Paint.Align.LEFT);
+                Rect titleBounds = new Rect();
+                String title = "Delete";
+                paint.getTextBounds(title, 0, title.length(), titleBounds);
+
+                double y = background.height() / 2 + titleBounds.height() / 2 - titleBounds.bottom;
+                c.drawText(title, background.left + 80, (float) (background.top + y), paint);
+                //viewHolder.ItemView.TranslationX = translationX;
+            }
+            else if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX > 0) // Swiping Right
+            {
+                translationX = Math.min(dX, height * 2);
+                paint.setColor(Color.RED);
+
+                RectF background = new RectF((float)itemView.getRight() + translationX, (float)itemView.getTop(), (float)itemView.getRight(), (float)itemView.getBottom());
+                c.drawRect(background, paint);
+
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(50);
+                paint.setTypeface(Typeface.DEFAULT_BOLD);
+                paint.setTextAlign(Paint.Align.LEFT);
+                Rect titleBounds = new Rect();
+                String title = "Delete";
+                paint.getTextBounds(title, 0, title.length(), titleBounds);
+
+                double y = background.height() / 2 + background.height() / 2 - titleBounds.bottom;
+                c.drawText(title, background.left + 50, (float) (background.top + y), paint);
+
+
+
+            }
+
+            super.onChildDraw(c, recyclerView, viewHolder, translationX, dY, actionState, isCurrentlyActive);
+
+        }
+    };
 
     private void anhXa() {
         recyclerViewKho = findViewById(R.id.recyclerViewKho);
-        floatingActionButtonKho=findViewById(R.id.floatingActionButtonKho);
+        floatingActionButtonKho = findViewById(R.id.floatingActionButtonKho);
     }
+
     public void dialogInsert() {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -66,7 +160,7 @@ public class KhoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String maKho = String.valueOf(editMaKho.getText());
                 String tenKho = String.valueOf(editTenKho.getText());
-                if (TextUtils.isEmpty(maKho) || TextUtils.isEmpty(tenKho) ) {
+                if (TextUtils.isEmpty(maKho) || TextUtils.isEmpty(tenKho)) {
                     Toast.makeText(KhoActivity.this, "Nội dung cần thêm chưa được nhập", Toast.LENGTH_SHORT).show();
 
                     return;
@@ -81,14 +175,14 @@ public class KhoActivity extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < arrayKho.size(); i++) {
-                    if(maKho==arrayKho.get(i).getMaKho()){
+                    if (maKho == arrayKho.get(i).getMaKho()) {
                         Toast.makeText(KhoActivity.this, "Mã kho bị trùng", Toast.LENGTH_SHORT).show();
 
                         return;
                     }
                 }
                 for (int i = 0; i < arrayKho.size(); i++) {
-                    if(tenKho==arrayKho.get(i).getTenKho()){
+                    if (tenKho == arrayKho.get(i).getTenKho()) {
                         Toast.makeText(KhoActivity.this, "Tên kho bị trùng", Toast.LENGTH_SHORT).show();
 
                         return;
@@ -113,6 +207,7 @@ public class KhoActivity extends AppCompatActivity {
 
         dialog.show();
     }
+
     public void dialogUpdate(String maKho, String tenKho) {
 
         Dialog dialog = new Dialog(this);
@@ -154,7 +249,7 @@ public class KhoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Kiem tra kho co phieu nhap khong
                 //kiem tra trung
-                Cursor data = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap WHERE MaKho='"+maKho+"'");
+                Cursor data = nhapKhoHelper.GetData("SELECT * FROM PhieuNhap WHERE MaKho='" + maKho + "'");
                 while (data.moveToNext()) {
                     Toast.makeText(KhoActivity.this, "Kho có phiếu nhập không thể xóa", Toast.LENGTH_SHORT).show();
 
@@ -169,7 +264,8 @@ public class KhoActivity extends AppCompatActivity {
 
         dialog.show();
     }
-    private void actionGetData(){
+
+    private void actionGetData() {
         arrayKho.clear();
 
         Cursor dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho");
@@ -179,7 +275,8 @@ public class KhoActivity extends AppCompatActivity {
             arrayKho.add(kho);
         }
 
-
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerViewKho);
 
         recyclerViewKho.setHasFixedSize(true);
         recyclerViewKho.setLayoutManager(new LinearLayoutManager(KhoActivity.this, LinearLayoutManager.VERTICAL, false));
@@ -187,4 +284,9 @@ public class KhoActivity extends AppCompatActivity {
         khoAdapter = new KhoAdapter(KhoActivity.this, arrayKho);
         recyclerViewKho.setAdapter(khoAdapter);
     }
+
+    public void btnClick(View view) {
+        onBackPressed();
+    }
+
 }

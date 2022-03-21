@@ -1,11 +1,19 @@
 package com.nhom2.qly_nhap_kho;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.database.Cursor;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -38,7 +46,7 @@ public class VatTuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vat_tu);
-        nhapKhoHelper=new NhapKhoHelper(this);
+        nhapKhoHelper = NhapKhoHelper.getInstance(this);
         anhXa();
         actionGetData();
 
@@ -172,6 +180,81 @@ public class VatTuActivity extends AppCompatActivity {
 
         dialog.show();
     }
+
+    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
+        private Paint paint = new Paint();
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            Toast.makeText(VatTuActivity.this, "on Move", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            Toast.makeText(VatTuActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+            //Remove swiped item from list and notify the RecyclerView
+            int position = viewHolder.getAdapterPosition();
+
+            nhapKhoHelper.QueryData("DELETE FROM VatTu WHERE MaVT='" + arrayVatTu.get(position).getMaVT() + "'");
+            arrayVatTu.remove(position);
+            vatTuAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+//            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+            float translationX = dX;
+            View itemView = viewHolder.itemView;
+            float height = (float)itemView.getBottom() - (float)itemView.getTop();
+
+            if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX <= 0) // Swiping Left
+            {
+                translationX = -Math.min(-dX, height * 2);
+                paint.setColor(Color.RED);
+                RectF background = new RectF((float)itemView.getRight() + translationX, (float)itemView.getTop(), (float)itemView.getRight(), (float)itemView.getBottom());
+                c.drawRect(background, paint);
+
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(50);
+                paint.setTypeface(Typeface.DEFAULT_BOLD);
+                paint.setTextAlign(Paint.Align.LEFT);
+                Rect titleBounds = new Rect();
+                String title = "Delete";
+                paint.getTextBounds(title, 0, title.length(), titleBounds);
+
+                double y = background.height() / 2 + titleBounds.height() / 2 - titleBounds.bottom;
+                c.drawText(title, background.left + 80, (float) (background.top + y), paint);
+                //viewHolder.ItemView.TranslationX = translationX;
+            }
+            else if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX > 0) // Swiping Right
+            {
+                translationX = Math.min(dX, height * 2);
+                paint.setColor(Color.RED);
+
+                RectF background = new RectF((float)itemView.getRight() + translationX, (float)itemView.getTop(), (float)itemView.getRight(), (float)itemView.getBottom());
+                c.drawRect(background, paint);
+
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(50);
+                paint.setTypeface(Typeface.DEFAULT_BOLD);
+                paint.setTextAlign(Paint.Align.LEFT);
+                Rect titleBounds = new Rect();
+                String title = "Delete";
+                paint.getTextBounds(title, 0, title.length(), titleBounds);
+
+                double y = background.height() / 2 + background.height() / 2 - titleBounds.bottom;
+                c.drawText(title, background.left + 50, (float) (background.top + y), paint);
+
+
+
+            }
+
+            super.onChildDraw(c, recyclerView, viewHolder, translationX, dY, actionState, isCurrentlyActive);
+
+        }
+    };
+
     private void actionGetData(){
         arrayVatTu.clear();
 
@@ -182,12 +265,17 @@ public class VatTuActivity extends AppCompatActivity {
             arrayVatTu.add(vatTu);
         }
 
-
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerViewVatTu);
 
         recyclerViewVatTu.setHasFixedSize(true);
         recyclerViewVatTu.setLayoutManager(new LinearLayoutManager(VatTuActivity.this, LinearLayoutManager.VERTICAL, false));
 
         vatTuAdapter = new VatTuAdapter(VatTuActivity.this, arrayVatTu);
         recyclerViewVatTu.setAdapter(vatTuAdapter);
+    }
+
+    public void btnClick(View view) {
+        onBackPressed();
     }
 }

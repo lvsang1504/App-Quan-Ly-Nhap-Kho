@@ -18,7 +18,7 @@ public class ListBaoCaoActivity extends AppCompatActivity {
 
     BaoCaoAdapter baoCaoAdapter;
     ListView listViewBaoCao;
-    ArrayList<String> arrayBaoCao=new ArrayList<>();
+    ArrayList<String> arrayBaoCao = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +39,16 @@ public class ListBaoCaoActivity extends AppCompatActivity {
         listViewBaoCao.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0){//bao cao so 1
-                    Intent intent=new Intent(ListBaoCaoActivity.this,ChiTietBaoCao1Activity.class);
+                if (i == 0) {//bao cao so 1
+                    Intent intent = new Intent(ListBaoCaoActivity.this, ChiTietBaoCao1Activity.class);
                     startActivity(intent);
                 }
-                if(i==1){//bao cao so 2
-                    Intent intent=new Intent(ListBaoCaoActivity.this,ChiTietBaoCao2Activity.class);
+                if (i == 1) {//bao cao so 2
+                    Intent intent = new Intent(ListBaoCaoActivity.this, ChiTietBaoCao2Activity.class);
                     startActivity(intent);
                 }
-                if(i==2){//bao cao so 3
-                    Intent intent=new Intent(ListBaoCaoActivity.this,ChiTietBaoCao3Activity.class);
+                if (i == 2) {//bao cao so 3
+                    Intent intent = new Intent(ListBaoCaoActivity.this, ChiTietBaoCao3Activity.class);
                     startActivity(intent);
 
                 }
@@ -58,11 +58,15 @@ public class ListBaoCaoActivity extends AppCompatActivity {
     }
 
     private void actionGetData() {
-        baoCaoAdapter=new BaoCaoAdapter(this,R.layout.list_bao_cao,arrayBaoCao);
+        baoCaoAdapter = new BaoCaoAdapter(this, R.layout.list_bao_cao, arrayBaoCao);
         listViewBaoCao.setAdapter(baoCaoAdapter);
     }
 
     private void setControl() {
-        listViewBaoCao=findViewById(R.id.listViewBaoBao);
+        listViewBaoCao = findViewById(R.id.listViewBaoBao);
+    }
+
+    public void btnClick(View view) {
+        onBackPressed();
     }
 }

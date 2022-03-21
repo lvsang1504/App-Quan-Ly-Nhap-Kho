@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardBackgroundColor="#EAEAEA"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    app:cardCornerRadius="8dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,24 +15,48 @@
         android:orientation="horizontal"
         android:weightSum="6">
 
-            <TextView
-                android:id="@+id/txtMaKho"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:text="Mã kho"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_weight="2"
-                android:gravity="center"/>
-            <TextView
-                android:id="@+id/txtTenKho"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:text="Tên kho"
-                android:textSize="20sp"
-                android:textStyle="normal"
-                android:layout_weight="4"
-                android:gravity="center"/>
+        <TextView
+            android:id="@+id/txtMaKho"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="Mã kho"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtTenKho"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="Tên kho"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/swipe_delete"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF0202"
+        android:gravity="center|right"
+        android:orientation="horizontal"
+        android:weightSum="6">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:text="Xóa"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_delete" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -7,12 +7,22 @@
     tools:context=".VatTuActivity">
 
 
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:onClick="btnClick"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewVatTu"
         android:layout_width="392dp"
         android:layout_height="536dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/boder_spinner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
@@ -24,19 +34,19 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
         android:text="Mã vật tư"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="40dp"
         android:text="Tên vật tư"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -49,7 +59,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="40dp"
         android:text="Xuất xứ"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -74,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="52dp"
         android:text="Quản lý vật tư"
         android:textSize="40dp"
         app:layout_constraintStart_toStartOf="parent"

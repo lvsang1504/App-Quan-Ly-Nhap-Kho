@@ -6,8 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="#00BCD4"
     tools:context=".ChiTietPhieuNhapActivity">
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:onClick="btnClick"
+        android:src="@drawable/ic_back" />
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="300dp"

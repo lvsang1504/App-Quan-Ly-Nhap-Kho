@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.nhom2.qly_nhap_kho.adapter.TableViewAdapterBaoCao1;
 import com.nhom2.qly_nhap_kho.dao.TableData;
@@ -52,5 +53,9 @@ public class ChiTietBaoCao1Activity extends AppCompatActivity {
             list.add(tableDataBaoCao1);
         }
         return list;
+    }
+
+    public void btnClick(View view) {
+        onBackPressed();
     }
 }
