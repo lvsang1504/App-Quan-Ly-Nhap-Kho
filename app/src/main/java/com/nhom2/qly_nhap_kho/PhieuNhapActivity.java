@@ -1,4 +1,4 @@
-package com.nhom2.qly_nhap_kho.model;
+package com.nhom2.qly_nhap_kho;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,12 +31,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.nhom2.qly_nhap_kho.ChiTietPhieuNhapActivity;
-import com.nhom2.qly_nhap_kho.MainActivity;
-import com.nhom2.qly_nhap_kho.NhapKhoHelper;
-import com.nhom2.qly_nhap_kho.R;
 import com.nhom2.qly_nhap_kho.adapter.PhieuNhapAdapter;
 import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
+import com.nhom2.qly_nhap_kho.model.Kho;
+import com.nhom2.qly_nhap_kho.model.PhieuNhap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +72,6 @@ public class PhieuNhapActivity extends AppCompatActivity {
         //arrayKho.add(new Kho("K0", "Tất cả"));
         ArrayList<String> arrayTenKho = new ArrayList<String>();
         arrayTenKho.add("Tất cả");
-
 
         //Hien thi
 

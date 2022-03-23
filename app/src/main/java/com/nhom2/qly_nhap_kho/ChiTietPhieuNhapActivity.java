@@ -5,6 +5,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -13,13 +14,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,12 +48,14 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
 
     NhapKhoHelper nhapKhoHelper;
     TextView txtTitle;
-    Button buttonReport;
-    RadioButton radioButton1,radioButton2;
+    Button buttonReport, btn_them_chi_tiet_pn;
+    RadioButton radioButton1, radioButton2;
 
     String id = "";
     PhieuNhap phieuNhap;
     Kho kho;
+    RecyclerView recyclerView;
+    TableViewAdapter adapter;
 
 
     @Override
@@ -63,17 +72,20 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
             phieuNhap = (PhieuNhap) bundle.getSerializable("phieuNhap");
             kho = (Kho) bundle.getSerializable("kho");
         }
-        radioButton1=findViewById(R.id.rdInVatTu);
-        radioButton2=findViewById(R.id.rdInPhieuNhap);
+        radioButton1 = findViewById(R.id.rdInVatTu);
+        radioButton2 = findViewById(R.id.rdInPhieuNhap);
         txtTitle = findViewById(R.id.txtTitle);
         buttonReport = findViewById(R.id.buttonReport);
+        btn_them_chi_tiet_pn = findViewById(R.id.btn_them_chi_tiet_pn);
+
+
         txtTitle.setText("Thông tin vật tư nhập kho của phiếu số " + id);
 
-        nhapKhoHelper = new NhapKhoHelper(this);
+        nhapKhoHelper = NhapKhoHelper.getInstance(this);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewDeliveryProductList);
+        recyclerView = findViewById(R.id.recyclerViewDeliveryProductList);
 
-        TableViewAdapter adapter = new TableViewAdapter(getList(id));
+        adapter = new TableViewAdapter(getList(id));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -84,23 +96,117 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
         buttonReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(radioButton1.isChecked()){
+                if (radioButton1.isChecked()) {
                     try {
                         createInvoice1(getList(finalId), phieuNhap, kho);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                if(radioButton2.isChecked()){
+                if (radioButton2.isChecked()) {
 
                 }
 
             }
         });
 
+        btn_them_chi_tiet_pn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogInsert();
+            }
+        });
+
     }
 
-    private void createInvoice1(List<TableData> list, PhieuNhap phieuNhap,Kho kho) throws IOException {
+    public void dialogInsert() {
+        Dialog dialog = new Dialog(this);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_themchitietphieunhap);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        EditText editSL = dialog.findViewById(R.id.editSL);
+        EditText editDVT = dialog.findViewById(R.id.editDVT);
+        Button btnThem = dialog.findViewById(R.id.btnThem);
+        Button btnHuy = dialog.findViewById(R.id.btnHuy);
+
+        //them du lieu vao spinner
+        Spinner spinnerVT = dialog.findViewById(R.id.spinnerVT);
+        Cursor dataKho = nhapKhoHelper.GetData("SELECT * FROM VatTu");
+        ArrayList<VatTu> arrayTam = new ArrayList<VatTu>();
+        ArrayList<String> arrayTenKhoTam = new ArrayList<String>();
+        VatTu vatTu = null;
+        while (dataKho.moveToNext()) {
+            vatTu = new VatTu(dataKho.getString(0), dataKho.getString(1), dataKho.getString(2));
+            arrayTam.add(vatTu);
+            arrayTenKhoTam.add(vatTu.getTenVt());
+        }
+        ArrayAdapter arrayAdapterTam = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTenKhoTam);
+        spinnerVT.setAdapter(arrayAdapterTam);
+
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int soPhieuMoi = 0;
+                String soLuong = editSL.getText().toString();
+                String maVT = String.valueOf(arrayTam.get(spinnerVT.getSelectedItemPosition()).getMaVT());
+                String tenVT = String.valueOf(arrayTam.get(spinnerVT.getSelectedItemPosition()).getTenVt());
+
+                if (TextUtils.isEmpty(String.valueOf(editSL.getText())) || TextUtils.isEmpty(editDVT.getText().toString()) || TextUtils.isEmpty(maVT)) {
+                    Toast.makeText(ChiTietPhieuNhapActivity.this, "Nội dung cần thêm chưa được nhập", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //kiem tra chu cai
+                try {
+                    soPhieuMoi = Integer.parseInt(String.valueOf(soLuong));
+                } catch (Exception e) {
+                    Toast.makeText(ChiTietPhieuNhapActivity.this, "Số phiếu là một số nguyên", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //kiem tra trung
+//                Cursor dataPhieuNhap = nhapKhoHelper.GetData("SELECT * FROM ChiTietPhieuNhap");
+//                ArrayList<ChiTietPhieuNhap> arrayPhieuNhap = new ArrayList<ChiTietPhieuNhap>();
+//                ChiTietPhieuNhap chiTietPhieuNhap;
+//                while (dataPhieuNhap.moveToNext()) {
+//                    chiTietPhieuNhap = new ChiTietPhieuNhap(dataPhieuNhap.getInt(0), dataPhieuNhap.getString(1), dataPhieuNhap.getString(2), Integer.parseInt(dataPhieuNhap.getString(3)));
+//                    arrayPhieuNhap.add(chiTietPhieuNhap);
+//                }
+//
+//                for (int i = 0; i < arrayPhieuNhap.size(); i++) {
+//                    if (soPhieuMoi == arrayPhieuNhap.get(i).()) {
+//                        Toast.makeText(ChiTietPhieuNhapActivity.this, "Số phiếu bị trùng", Toast.LENGTH_SHORT).show();
+//
+//                        return;
+//                    }
+//                }
+
+
+                nhapKhoHelper.QueryData("INSERT INTO ChiTietPhieuNhap VALUES (" + id + ",'" + maVT + "', '" + tenVT + "', " + soLuong + ")");
+                Log.d("AAA", "INSERT INTO ChiTietPhieuNhap VALUES (" + id + ",'" + maVT + "', '" + tenVT + "', " + soLuong + ")");
+                adapter = new TableViewAdapter(getList(id));
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                recyclerView.setLayoutManager(linearLayoutManager);
+
+                recyclerView.setAdapter(adapter);
+                dialog.dismiss();
+
+            }
+        });
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private void createInvoice1(List<TableData> list, PhieuNhap phieuNhap, Kho kho) throws IOException {
         int pageWidth = 1200;
 //        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.dp);
 //        Bitmap bmpScale = Bitmap.createScaledBitmap(bmp, 1200, 518, false);
@@ -160,7 +266,7 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
 
         for (int i = 0; i < list.size(); i++) {
             TableData t = list.get(i);
-            int tt = i+1;
+            int tt = i + 1;
             canvas.drawText(tt + "", 40, offsetY, paint);
             canvas.drawText(t.maVT, 130, offsetY, paint);
             canvas.drawText(t.tenVT, 290, offsetY, paint);
@@ -171,21 +277,21 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
             total += t.soLuong;
         }
 
-        canvas.drawLine(680, offsetY+80, pageWidth - 20, offsetY+80, paint);
+        canvas.drawLine(680, offsetY + 80, pageWidth - 20, offsetY + 80, paint);
 
         paint.setColor(Color.BLACK);
         paint.setTextSize(50);
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("Tổng số lượng:", 700, offsetY+150, paint);
+        canvas.drawText("Tổng số lượng:", 700, offsetY + 150, paint);
         paint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawText(total + "", pageWidth - 20, offsetY+150, paint);
+        canvas.drawText(total + "", pageWidth - 20, offsetY + 150, paint);
 
         paint.setColor(Color.BLACK);
         paint.setTextSize(50);
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("Số loại vật tư:", 700, offsetY+220, paint);
+        canvas.drawText("Số loại vật tư:", 700, offsetY + 220, paint);
         paint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawText(list.size() + "", pageWidth - 20, offsetY+220, paint);
+        canvas.drawText(list.size() + "", pageWidth - 20, offsetY + 220, paint);
 
         myPdfDocument.finishPage(myPage1);
 
@@ -207,7 +313,7 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
 
     }
 
-    private void createInvoice2(List<TableData> list, PhieuNhap phieuNhap,Kho kho) throws IOException {
+    private void createInvoice2(List<TableData> list, PhieuNhap phieuNhap, Kho kho) throws IOException {
         int pageWidth = 1200;
 //        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.dp);
 //        Bitmap bmpScale = Bitmap.createScaledBitmap(bmp, 1200, 518, false);
@@ -267,7 +373,7 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
 
         for (int i = 0; i < list.size(); i++) {
             TableData t = list.get(i);
-            int tt = i+1;
+            int tt = i + 1;
             canvas.drawText(tt + "", 40, offsetY, paint);
             canvas.drawText(t.maVT, 130, offsetY, paint);
             canvas.drawText(t.tenVT, 290, offsetY, paint);
@@ -278,21 +384,21 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
             total += t.soLuong;
         }
 
-        canvas.drawLine(680, offsetY+80, pageWidth - 20, offsetY+80, paint);
+        canvas.drawLine(680, offsetY + 80, pageWidth - 20, offsetY + 80, paint);
 
         paint.setColor(Color.BLACK);
         paint.setTextSize(50);
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("Tổng số lượng:", 700, offsetY+150, paint);
+        canvas.drawText("Tổng số lượng:", 700, offsetY + 150, paint);
         paint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawText(total + "", pageWidth - 20, offsetY+150, paint);
+        canvas.drawText(total + "", pageWidth - 20, offsetY + 150, paint);
 
         paint.setColor(Color.BLACK);
         paint.setTextSize(50);
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("Số loại vật tư:", 700, offsetY+220, paint);
+        canvas.drawText("Số loại vật tư:", 700, offsetY + 220, paint);
         paint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawText(list.size() + "", pageWidth - 20, offsetY+220, paint);
+        canvas.drawText(list.size() + "", pageWidth - 20, offsetY + 220, paint);
 
         myPdfDocument.finishPage(myPage1);
 

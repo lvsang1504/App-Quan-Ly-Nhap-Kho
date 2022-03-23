@@ -11,9 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nhom2.qly_nhap_kho.R;
 import com.nhom2.qly_nhap_kho.VatTuActivity;
-import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
-import com.nhom2.qly_nhap_kho.model.PhieuNhap;
-import com.nhom2.qly_nhap_kho.model.PhieuNhapActivity;
 import com.nhom2.qly_nhap_kho.model.VatTu;
 
 import java.util.List;

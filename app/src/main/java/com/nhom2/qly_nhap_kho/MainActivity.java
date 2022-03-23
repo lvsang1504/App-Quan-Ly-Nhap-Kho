@@ -1,38 +1,15 @@
 package com.nhom2.qly_nhap_kho;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nhom2.qly_nhap_kho.adapter.CustomGridAdapter;
-import com.nhom2.qly_nhap_kho.adapter.PhieuNhapAdapter;
-import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
 import com.nhom2.qly_nhap_kho.model.GridItem;
-import com.nhom2.qly_nhap_kho.model.Kho;
-import com.nhom2.qly_nhap_kho.model.PhieuNhap;
-import com.nhom2.qly_nhap_kho.model.PhieuNhapActivity;
 
 import java.util.ArrayList;
 import java.util.List;

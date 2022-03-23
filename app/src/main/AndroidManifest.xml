@@ -30,7 +30,7 @@
             android:name=".VatTuActivity"
             android:exported="false" />
         <activity
-            android:name=".model.PhieuNhapActivity"
+            android:name=".PhieuNhapActivity"
             android:exported="false" />
         <activity
             android:name=".ChiTietPhieuNhapActivity"

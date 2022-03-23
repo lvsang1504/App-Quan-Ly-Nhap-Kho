@@ -18,18 +18,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.nhom2.qly_nhap_kho.adapter.PhieuNhapAdapter;
 import com.nhom2.qly_nhap_kho.adapter.VatTuAdapter;
-import com.nhom2.qly_nhap_kho.model.Kho;
-import com.nhom2.qly_nhap_kho.model.PhieuNhap;
-import com.nhom2.qly_nhap_kho.model.PhieuNhapActivity;
 import com.nhom2.qly_nhap_kho.model.VatTu;
 
 import java.util.ArrayList;
