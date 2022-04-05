@@ -1,11 +1,19 @@
 package com.nhom2.qly_nhap_kho;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.nhom2.qly_nhap_kho.model.Kho;
+import com.nhom2.qly_nhap_kho.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NhapKhoHelper extends SQLiteOpenHelper {
 
@@ -51,9 +59,10 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Tao bang
+        db.execSQL("CREATE TABLE IF NOT EXISTS User(ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME VARCHAR(100),LASTNAME VARCHAR(100),EMAIL VARCHAR(100), PASSWORD VARCHAR(100))");
         db.execSQL("CREATE TABLE IF NOT EXISTS Kho(MaKho VARCHAR(5),TenKho VARCHAR(100))");
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS PhieuNhap(SoPhieu INTEGER,NgayLap VARCHAR,MaKho VARCHAR(5))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS PhieuNhap(SoPhieu INTEGER ,NgayLap VARCHAR,MaKho VARCHAR(5))");
         db.execSQL("CREATE TABLE IF NOT EXISTS ChiTietPhieuNhap(SoPhieu INTEGER,MaVT VARCHAR,DVT VARCHAR, SoLuong INTEGER)");
         db.execSQL("CREATE TABLE IF NOT EXISTS VatTu(MaVT VARCHAR, TenVT VARCHAR,XuatXu VARCHAR)");
 
@@ -61,6 +70,10 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Kho VALUES ('K1','Bình Chánh')");
         db.execSQL("INSERT INTO Kho VALUES ('K2','Tân Phú')");
         db.execSQL("INSERT INTO Kho VALUES ('K3','Thủ Đức')");
+
+        //user
+
+        db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','admin@gmail.com','123456')");
 
         //Them du lieu phieu nhap
         db.execSQL("INSERT INTO PhieuNhap VALUES ('1','20/06/2013', 'K1')");
@@ -93,4 +106,55 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    public int addUser(User user) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String selection = "WHERE EMAIL='" + user.getEmail() + "'";
+
+        Cursor cursor = db.rawQuery("SELECT * FROM User " + selection, null);
+        int count = cursor.getCount();
+
+        if (count>1) {
+            return 1;
+        }
+
+        db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('" + user.getFirstname()
+                + "','" + user.getLastname()
+                + "','" + user.getEmail()
+                + "','" + user.getPassword()
+                + "')");
+        return 0;
+    }
+
+    public User checkUserExist(String username, String password) {
+        User user = null;
+        SQLiteDatabase db = getReadableDatabase();
+
+        String selection = "WHERE EMAIL='" + username + "' and PASSWORD = '" + password + "'";
+
+        Cursor cursor = db.rawQuery("SELECT * FROM User " + selection, null);
+        int count = cursor.getCount();
+        System.out.println(count + "");
+        while (cursor.moveToNext()) {
+            user = new User(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4)
+            );
+        }
+
+        cursor.close();
+        close();
+
+        if (count > 0) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+
 }

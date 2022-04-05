@@ -1,12 +1,20 @@
 package com.nhom2.qly_nhap_kho;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nhom2.qly_nhap_kho.adapter.CustomGridAdapter;
 import com.nhom2.qly_nhap_kho.model.GridItem;
@@ -16,60 +24,57 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    NhapKhoHelper helper;
+    private PreferenceManager preferenceManager;
+    TextView textHeader, textEmail;
+    ImageButton btnSignOut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        textHeader = findViewById(R.id.textHeader);
+        textEmail = findViewById(R.id.textEmail);
+        btnSignOut = findViewById(R.id.btnSignOut);
 
-        helper = NhapKhoHelper.getInstance(this);
+        preferenceManager = new PreferenceManager(MainActivity.this);
 
-        List<GridItem> image_details = getListData();
-        final GridView gridView = findViewById(R.id.gridView);
-        gridView.setAdapter(new CustomGridAdapter(this, image_details));
+        loadUserDetails();
 
-
-        // When the user clicks on the GridItem
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                switch (position) {
-                    case 0:
-                        Intent intent0 = new Intent(MainActivity.this, KhoActivity.class);
-                        startActivity(intent0);
-                        break;
-                    case 1:
-                        Intent intent1 = new Intent(MainActivity.this, PhieuNhapActivity.class);
-                        startActivity(intent1);
-                        break;
-                    case 2:
-                        Intent intent2 = new Intent(MainActivity.this, VatTuActivity.class);
-                        startActivity(intent2);
-                        break;
-                    case 3:
-                        Intent intent3 = new Intent(MainActivity.this, ListBaoCaoActivity.class);
-                        startActivity(intent3);
-                        break;
-                }
-            }
-        });
+        btnSignOut.setOnClickListener(v -> signOut());
     }
 
-    private List<GridItem> getListData() {
-        List<GridItem> list = new ArrayList<GridItem>();
-        GridItem gridItem = new GridItem("Kho", "warehouse_64px");
-        GridItem gridItem1 = new GridItem("Phiếu nhập", "receipt_64px");
-        GridItem gridItem2 = new GridItem("Vật tư", "commodity_64px");
-        GridItem gridItem3 = new GridItem("Báo cáo", "presentation_64px");
+    private void loadUserDetails() {
+        textHeader.setText("Xin chào " + preferenceManager.getString(Constants.KEY_NAME) + "!");
+        textEmail.setText(preferenceManager.getString(Constants.KEY_EMAIL));
 
-        list.add(gridItem);
-        list.add(gridItem1);
-        list.add(gridItem2);
-        list.add(gridItem3);
+    }
 
-        return list;
+    private void signOut() {
+        Toast.makeText(MainActivity.this, "Đăng xuất...", Toast.LENGTH_LONG).show();
+        preferenceManager.clear();
+        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 
+    public void baoCaoCard(View view) {
+        Intent intent = new Intent(MainActivity.this, ListBaoCaoActivity.class);
+        startActivity(intent);
+    }
+
+    public void khoCard(View view) {
+        Intent intent = new Intent(MainActivity.this, KhoActivity.class);
+        startActivity(intent);
+    }
+
+    public void phieuNhapCard(View view) {
+        Intent intent = new Intent(MainActivity.this, PhieuNhapActivity.class);
+        startActivity(intent);
+    }
+
+    public void vatTuCard(View view) {
+        Intent intent = new Intent(MainActivity.this, VatTuActivity.class);
+        startActivity(intent);
+    }
 }

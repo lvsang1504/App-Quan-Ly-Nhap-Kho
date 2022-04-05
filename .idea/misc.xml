@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/custom_rectangle.xml" value="0.1" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/ic_phieu_nhap.xml" value="0.1" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/splash_screen_bg.xml" value="0.132" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_login.xml" value="0.12158054711246201" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_register.xml" value="0.18478260869565216" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/background_dialog.xml" value="0.25794871794871793" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/boder_spinner.xml" value="0.26614583333333336" />
         <entry key="..\:/Qly_nhap_kho/app/src/main/res/drawable/border_edit.xml" value="0.25794871794871793" />
