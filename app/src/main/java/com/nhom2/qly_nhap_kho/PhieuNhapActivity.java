@@ -20,6 +20,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -48,6 +49,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
     PhieuNhapAdapter phieuNhapAdapter;
     TextView txtTongPhieuNhap;
     FloatingActionButton floatingActionButton;
+    EditText editTextSearchPhieuNhap;
 
     List<PhieuNhap> arrayPhieuNhap = new ArrayList<>();
     Kho kho;
@@ -66,6 +68,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
         recycleView = findViewById(R.id.recycleView);
         txtTongPhieuNhap = findViewById(R.id.txtTongPhieuNhap);
         floatingActionButton = findViewById(R.id.floatingActionButton);
+        editTextSearchPhieuNhap=findViewById(R.id.editTextSearchPhieuNhap);
 
 
         ArrayList<Kho> arrayKho = new ArrayList<Kho>();
@@ -104,7 +107,13 @@ public class PhieuNhapActivity extends AppCompatActivity {
                 dialogInsert();
             }
         });
-
+        editTextSearchPhieuNhap.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                actionGetData();
+                return false;
+            }
+        });
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -119,7 +128,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
             int position = viewHolder.getAdapterPosition();
-
+//
             Toast.makeText(PhieuNhapActivity.this, "Xóa thành công " + arrayPhieuNhap.get(position).getSoPhieu(), Toast.LENGTH_SHORT).show();
             //Remove swiped item from list and notify the RecyclerView
 
@@ -183,10 +192,16 @@ public class PhieuNhapActivity extends AppCompatActivity {
 
     public void actionGetData() {
         arrayPhieuNhap.clear();
-
+        String searchPN=editTextSearchPhieuNhap.getText().toString();
         if (spinnerKho.getSelectedItem().toString().equals("Tất cả")) {
+            Cursor dataPhieuNhap;
+            if(searchPN!=""){
+                dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap WHERE SoPhieu LIKE '%"+searchPN+"%'");
+            }else{
+                dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap ");
+                txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
+            }
 
-            Cursor dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap ");
             kho = new Kho("Tất cả", "Tất cả");
 
             PhieuNhap phieuNhap;
@@ -194,17 +209,21 @@ public class PhieuNhapActivity extends AppCompatActivity {
                 phieuNhap = new PhieuNhap(Integer.valueOf(dataPhieuNhap.getString(0)), dataPhieuNhap.getString(1), dataPhieuNhap.getString(2));
                 arrayPhieuNhap.add(phieuNhap);
             }
-
-            txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
         } else {
             Cursor dataKho = helper.GetData("SELECT * FROM Kho WHERE TenKho='" + spinnerKho.getSelectedItem().toString() + "'");
             String ma = "";
-
+            Cursor dataPhieuNhap;
             while (dataKho.moveToNext()) {
                 ma = dataKho.getString(0);
                 kho = new Kho(ma, dataKho.getString(1));
             }
-            Cursor dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap WHERE MaKho = '" + ma + "'");
+            if(searchPN!=""){
+                dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap WHERE MaKho = '" + ma + "' AND SoPhieu LIKE '%"+searchPN+"%'");
+            }else{
+                dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap WHERE MaKho = '" + ma + "'");
+                txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
+            }
+
 
             PhieuNhap phieuNhap;
             while (dataPhieuNhap.moveToNext()) {
@@ -213,6 +232,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
             }
             txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
         }
+
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recycleView);

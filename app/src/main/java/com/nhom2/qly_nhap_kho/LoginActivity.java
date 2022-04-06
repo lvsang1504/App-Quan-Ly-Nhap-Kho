@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+
 
 import com.google.android.material.button.MaterialButton;
 import com.nhom2.qly_nhap_kho.model.User;
@@ -22,9 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        buttonSignIn = findViewById(R.id.buttonSignIn);
-        inputEmail = findViewById(R.id.inputEmail);
-        inputPassword = findViewById(R.id.inputPassword);
+        setControl();
+
 
         helper = NhapKhoHelper.getInstance(this);
         preferenceManager = new PreferenceManager(getApplicationContext());
@@ -59,6 +62,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void setControl() {
+        buttonSignIn = findViewById(R.id.buttonSignIn);
+        inputEmail = findViewById(R.id.inputEmail);
+        inputPassword = findViewById(R.id.inputPassword);
+    }
+
     private boolean check() {
         if (inputEmail.getText().toString().trim().isEmpty()) {
             Toast.makeText(LoginActivity.this, "Enter email", Toast.LENGTH_LONG).show();
@@ -73,6 +82,17 @@ public class LoginActivity extends AppCompatActivity {
 
     public void signUp(View view) {
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    public void forgotPassword(View view) {
+        if(inputEmail.getText().toString().isEmpty()){
+            Toast.makeText(LoginActivity.this, "Enter email", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
+        intent.putExtra("gmail",inputEmail.getText().toString());
+        Log.d("gmail",inputEmail.getText().toString());
         startActivity(intent);
     }
 }

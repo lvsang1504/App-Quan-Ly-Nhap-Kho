@@ -111,6 +111,17 @@
             android:textSize="16dp"
             android:onClick="signUp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Quên mật khẩu?"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            android:onClick="forgotPassword" />
     </LinearLayout>
 
 </ScrollView>

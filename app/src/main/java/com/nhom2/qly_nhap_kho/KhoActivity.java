@@ -17,6 +17,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class KhoActivity extends AppCompatActivity {
     List<Kho> arrayKho = new ArrayList<>();
     Kho kho;
     FloatingActionButton floatingActionButtonKho;
+    EditText editTextSearchKho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,13 @@ public class KhoActivity extends AppCompatActivity {
                 dialogInsert();
             }
         });
-
+        editTextSearchKho.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                actionGetData();
+                return false;
+            }
+        });
 
     }
 
@@ -140,6 +148,7 @@ public class KhoActivity extends AppCompatActivity {
     };
 
     private void anhXa() {
+        editTextSearchKho = findViewById(R.id.editTextSearchKho);
         recyclerViewKho = findViewById(R.id.recyclerViewKho);
         floatingActionButtonKho = findViewById(R.id.floatingActionButtonKho);
     }
@@ -267,8 +276,13 @@ public class KhoActivity extends AppCompatActivity {
 
     private void actionGetData() {
         arrayKho.clear();
-
-        Cursor dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho");
+        String searchKho=editTextSearchKho.getText().toString();
+        Cursor dataKho;
+        if(searchKho!=""){
+            dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho WHERE TenKho LIKE '%"+searchKho+"%'");
+        }else{
+            dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho");
+        }
 
         while (dataKho.moveToNext()) {
             kho = new Kho(dataKho.getString(0), dataKho.getString(1));

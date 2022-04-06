@@ -16,6 +16,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class VatTuActivity extends AppCompatActivity {
     List<VatTu> arrayVatTu = new ArrayList<>();
     VatTu vatTu;
     FloatingActionButton floatingActionButtonVatTu;
+    EditText editTextSearchVatTu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,12 +53,20 @@ public class VatTuActivity extends AppCompatActivity {
                 dialogInsert();
             }
         });
+        editTextSearchVatTu.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                actionGetData();
+                return false;
+            }
+        });
     }
 
 
     private void anhXa() {
         recyclerViewVatTu = findViewById(R.id.recyclerViewVatTu);
         floatingActionButtonVatTu=findViewById(R.id.floatingActionButtonVatTu);
+        editTextSearchVatTu=findViewById(R.id.editTextSearchVatTu);
     }
 
     public void dialogInsert() {
@@ -251,8 +261,13 @@ public class VatTuActivity extends AppCompatActivity {
 
     private void actionGetData(){
         arrayVatTu.clear();
-
-        Cursor dataVatTu = nhapKhoHelper.GetData("SELECT * FROM VatTu");
+        String searchVatTu=editTextSearchVatTu.getText().toString();
+        Cursor dataVatTu;
+        if(searchVatTu!=""){
+            dataVatTu = nhapKhoHelper.GetData("SELECT * FROM VatTu WHERE TenVT LIKE '%"+searchVatTu+"%'");
+        }else{
+            dataVatTu = nhapKhoHelper.GetData("SELECT * FROM VatTu");
+        }
 
         while (dataVatTu.moveToNext()) {
             vatTu = new VatTu(dataVatTu.getString(0), dataVatTu.getString(1),dataVatTu.getString(2));
