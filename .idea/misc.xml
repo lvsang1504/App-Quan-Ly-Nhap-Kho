@@ -5,7 +5,11 @@
       <map>
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/custom_rectangle.xml" value="0.1" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/ic_phieu_nhap.xml" value="0.1" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/input_ing_background.xml" value="0.2065" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/material_img_background.xml" value="0.2065" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/report_img_background.xml" value="0.2065" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/splash_screen_bg.xml" value="0.132" />
+        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/store_img_background.xml" value="0.2065" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_login.xml" value="0.12158054711246201" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_register.xml" value="0.18478260869565216" />
