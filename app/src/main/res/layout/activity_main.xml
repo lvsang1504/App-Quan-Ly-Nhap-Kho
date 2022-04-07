@@ -4,18 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e4e4e4"
+    android:background="@color/background_color"
     tools:context=".MainActivity"
     tools:ignore="HardcodedText">
 
-    <View
+    <ImageView
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:background="@drawable/custom_rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dashbord_bacground" />
 
 
     <TextView
@@ -27,7 +25,7 @@
         android:letterSpacing="0.025"
         android:text="Quản lý vật tư"
         android:textAllCaps="true"
-        android:textColor="@color/white"
+        android:textColor="@color/teal_700"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/btnSignOut"
@@ -41,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="?attr/selectableItemBackground"
+        android:background="@color/main_color1"
         android:padding="8dp"
         android:src="@drawable/ic_logout"
         app:layout_constraintCircleRadius="24dp"
@@ -118,222 +116,194 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
-
-        android:id="@+id/linearLayout"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:gravity="center_horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="200dp"
         android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/khoCard"
-            android:onClick="khoCard"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:clickable="true"
-            android:elevation="12dp"
+            android:onClick="khoCard"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/background_color_50"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_view1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/store_img_background"
+                    android:scaleType="fitXY"
+                    android:padding="15dp"
                     android:src="@drawable/ic_store"
-                    app:layout_constraintBottom_toTopOf="@+id/textView1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:tint="#fff" />
 
                 <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:fontFamily="@font/lato_black"
                     android:text="Kho"
-                    android:textAllCaps="true"
-                    android:textColor="@color/main_color"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view1" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    android:textColor="#257FC5"
+                    android:textSize="22sp" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/phieuNhapCard"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
             android:onClick="phieuNhapCard"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="8dp"
-            android:layout_marginStart="16dp"
+            android:layout_weight="1"
             android:clickable="true"
-            android:elevation="12dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/background_color_50"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_view20"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/input_ing_background"
+                    android:padding="15dp"
                     android:src="@drawable/ic_phieu_nhap"
-                    app:layout_constraintBottom_toTopOf="@+id/textView20"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:tint="#fff" />
 
                 <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:fontFamily="@font/lato_black"
                     android:text="Phiếu nhập"
-                    android:textAllCaps="true"
-                    android:textColor="@color/main_color"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view20" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    android:textColor="#7159CF"
+                    android:textSize="22sp" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="2"
         android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintStart_toStartOf="@id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/vatTuCard"
-            android:onClick="vatTuCard"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:clickable="true"
-            android:elevation="12dp"
+            android:onClick="vatTuCard"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/background_color_50"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_view21"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/material_img_background"
+                    android:padding="15dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_vat_tu"
-                    app:layout_constraintBottom_toTopOf="@+id/textView21"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:tint="#fff" />
 
                 <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Vật Tư"
-                    android:textAllCaps="true"
-                    android:textColor="@color/main_color"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view21" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    android:fontFamily="@font/lato_black"
+                    android:text="Vật tư"
+                    android:textColor="#F8C5AA"
+                    android:textSize="22sp" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+
         <androidx.cardview.widget.CardView
-            android:onClick="baoCaoCard"
-            android:id="@+id/baoCaoCard"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="8dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:clickable="true"
-            android:elevation="12dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            android:onClick="baoCaoCard"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/background_color_50"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_view22"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/report_img_background"
+                    android:padding="15dp"
                     android:src="@drawable/ic_bao_cao"
-                    app:layout_constraintBottom_toTopOf="@+id/textView22"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:tint="#fff" />
 
                 <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:fontFamily="@font/lato_black"
                     android:text="Báo cáo"
-                    android:textAllCaps="true"
-                    android:textColor="@color/main_color"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view22" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    android:textColor="#80FC8C"
+                    android:textSize="22sp" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
