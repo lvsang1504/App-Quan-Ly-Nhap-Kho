@@ -59,7 +59,7 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Tao bang
-        db.execSQL("CREATE TABLE IF NOT EXISTS User(ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME VARCHAR(100),LASTNAME VARCHAR(100),EMAIL VARCHAR(100), PASSWORD VARCHAR(100))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS User(ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME VARCHAR(100),LASTNAME VARCHAR(100),EMAIL VARCHAR(100), PASSWORD VARCHAR(100), IMAGE VARCHAR(5000))");
         db.execSQL("CREATE TABLE IF NOT EXISTS Kho(MaKho VARCHAR(5),TenKho VARCHAR(100))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS PhieuNhap(SoPhieu INTEGER ,NgayLap VARCHAR,MaKho VARCHAR(5))");
@@ -119,10 +119,11 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
             return 1;
         }
 
-        db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('" + user.getFirstname()
+        db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD, IMAGE) VALUES ('" + user.getFirstname()
                 + "','" + user.getLastname()
                 + "','" + user.getEmail()
                 + "','" + user.getPassword()
+                + "','" + user.getImageBitmap()
                 + "')");
         return 0;
     }
@@ -142,7 +143,8 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
                     cursor.getString(1),
                     cursor.getString(2),
                     cursor.getString(3),
-                    cursor.getString(4)
+                    cursor.getString(4),
+                    cursor.getString(5)
             );
         }
 

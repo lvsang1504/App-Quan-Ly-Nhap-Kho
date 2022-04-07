@@ -88,7 +88,7 @@
                 android:fontFamily="@font/open_sans_bold"
                 android:text="Login"
                 android:textAllCaps="false"
-                android:backgroundTint="@color/main_color"
+                android:backgroundTint="@color/main_color1"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 android:textStyle="bold"

@@ -32,12 +32,27 @@
             android:textSize="18dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <FrameLayout
             android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_round_account_circle_24" />
+            android:id="@+id/layoutImage"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageProfile"
+                android:background="@drawable/background_image"
+                android:scaleType="centerCrop"
+                android:layout_width="80dp"
+                android:layout_height="80dp"/>
+            <TextView
+                android:id="@+id/textAddImage"
+                android:textSize="10dp"
+                android:textColor="@color/black"
+                android:text="Add image"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -144,7 +159,7 @@
                 android:id="@+id/buttonSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:backgroundTint="@color/main_color"
+                android:backgroundTint="@color/main_color1"
                 android:text="Sign Up"
                 android:textColor="@color/white"
                 android:textSize="13dp"

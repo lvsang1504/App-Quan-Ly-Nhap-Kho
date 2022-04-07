@@ -6,13 +6,15 @@ public class User {
     private String lastname;
     private String email;
     private String password;
+    private String imageBitmap;
 
-    public User(int id, String firstname, String lastname, String email, String password) {
+    public User(int id, String firstname, String lastname, String email, String password, String imageBitmap) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.imageBitmap = imageBitmap;
     }
 
     public int getId() {
@@ -53,5 +55,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImageBitmap() {
+        return imageBitmap;
+    }
+
+    public void setImageBitmap(String imageBitmap) {
+        this.imageBitmap = imageBitmap;
     }
 }

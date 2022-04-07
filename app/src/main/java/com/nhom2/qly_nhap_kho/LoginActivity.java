@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                         preferenceManager.putString(Constants.KEY_USER_ID, user.getId() + "");
                         preferenceManager.putString(Constants.KEY_NAME, user.getFirstname() + " " + user.getLastname());
                         preferenceManager.putString(Constants.KEY_EMAIL, user.getEmail());
+                        preferenceManager.putString(Constants.KEY_IMAGE, user.getImageBitmap());
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);

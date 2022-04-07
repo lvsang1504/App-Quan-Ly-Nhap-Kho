@@ -6,15 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".PhieuNhapActivity">
 
-    <View
+    <ImageView
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/main_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dashbord_bacground" />
 
     <ImageView
         android:id="@+id/btnBack"
@@ -60,9 +57,10 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/phieu_nhap"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:text="Quản lý phiếu nhập"
+        android:textAllCaps="true"
+        android:textSize="25sp"
+        android:textColor="@color/teal_700"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
