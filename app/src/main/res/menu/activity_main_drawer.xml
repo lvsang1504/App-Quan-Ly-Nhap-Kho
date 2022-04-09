@@ -12,18 +12,13 @@
         android:icon="@drawable/ic_store"
         android:title="Kho" />
     <item
-        android:id="@+id/synch"
+        android:id="@+id/nav_phieu_nhap"
         android:icon="@drawable/ic_phieu_nhap"
         android:title="Phiếu nhập" />
     <item
-        android:id="@+id/trash"
+        android:id="@+id/nav_vat_tu"
         android:icon="@drawable/ic_vat_tu"
         android:title="Vật tu" />
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_bao_cao"
-        android:title="Settings" />
-
 
     <item android:title="Profile">
         <menu>
@@ -37,7 +32,7 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_policy"
                 android:icon="@drawable/ic_feed"
                 android:title="Share" />
             <item
