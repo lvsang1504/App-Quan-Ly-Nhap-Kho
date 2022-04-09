@@ -1,4 +1,4 @@
-package com.nhom2.qly_nhap_kho.ui.home;
+package com.nhom2.qly_nhap_kho;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,14 +17,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.imageview.ShapeableImageView;
-import com.nhom2.qly_nhap_kho.Constants;
-import com.nhom2.qly_nhap_kho.KhoActivity;
-import com.nhom2.qly_nhap_kho.ListBaoCaoActivity;
-import com.nhom2.qly_nhap_kho.LoginActivity;
-import com.nhom2.qly_nhap_kho.PhieuNhapActivity;
-import com.nhom2.qly_nhap_kho.PreferenceManager;
-import com.nhom2.qly_nhap_kho.R;
-import com.nhom2.qly_nhap_kho.VatTuActivity;
 
 public class HomeFragment extends Fragment {
 

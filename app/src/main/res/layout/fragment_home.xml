@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".ui.home.HomeFragment"
+    tools:context=".HomeFragment"
     tools:ignore="HardcodedText">
 
     <ImageView
@@ -142,13 +142,14 @@
             android:onClick="khoCard"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="30dp"
-            app:cardElevation="8dp">
+            app:cardElevation="4dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@color/background_color"
                 android:orientation="vertical">
 
                 <ImageView
@@ -184,12 +185,13 @@
             android:onClick="phieuNhapCard"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="30dp"
-            app:cardElevation="8dp">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@color/background_color"
                 android:orientation="vertical">
 
                 <ImageView
@@ -234,13 +236,14 @@
             android:onClick="vatTuCard"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="30dp"
-            app:cardElevation="8dp">
+            app:cardElevation="4dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@color/background_color"
                 android:orientation="vertical">
 
                 <ImageView
@@ -276,13 +279,14 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="30dp"
-            app:cardElevation="8dp">
+            app:cardElevation="4dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@color/background_color"
                 android:orientation="vertical">
 
                 <ImageView
