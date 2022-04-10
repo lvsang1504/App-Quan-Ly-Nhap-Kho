@@ -53,9 +53,11 @@ public class VatTuActivity extends AppCompatActivity {
                 dialogInsert();
             }
         });
+//        editTextSearchVatTu.onKeyDown()
         editTextSearchVatTu.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                System.out.println(keyEvent.getKeyCode());
                 actionGetData();
                 return false;
             }

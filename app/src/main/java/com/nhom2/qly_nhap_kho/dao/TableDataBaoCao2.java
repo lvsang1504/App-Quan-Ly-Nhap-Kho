@@ -1,8 +1,8 @@
 package com.nhom2.qly_nhap_kho.dao;
 
 public class TableDataBaoCao2 {
-    public String maKho;
-    public String tenKho;
+    private String maKho;
+    private String tenKho;
 
     public TableDataBaoCao2(String maKho, String tenKho) {
         this.maKho=maKho;

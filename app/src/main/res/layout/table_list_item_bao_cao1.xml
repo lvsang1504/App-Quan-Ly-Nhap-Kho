@@ -16,7 +16,6 @@
         android:layout_gravity="top"
         android:background="@drawable/table_content_cell_bg"
         android:gravity="center"
-        android:text="20"
         android:textSize="18sp" />
 
     <TextView
@@ -27,7 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@drawable/table_content_cell_bg"
-        android:textSize="18sp" />
+        android:gravity="center"
+        android:textSize="18sp"
+        />
 
     <TextView
         android:padding="4dp"
@@ -37,7 +38,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="top"
         android:background="@drawable/table_content_cell_bg"
-        android:textSize="18sp" />
+        android:gravity="center"
+        android:textSize="18sp"
+        />
 
 
 

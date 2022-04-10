@@ -1,14 +1,14 @@
 package com.nhom2.qly_nhap_kho.dao;
 
 public class TableDataBaoCao1 {
-    public String maKho;
-    public String tenKho;
-    public int soLoaiVatTu;
+    private String maKho;
+    private String tenKho;
+    private int soLoaiVatTu;
 
-    public TableDataBaoCao1(String maKho, String tenKho,int soLoaiVatTu) {
-        this.maKho=maKho;
-        this.tenKho=tenKho;
-        this.soLoaiVatTu=soLoaiVatTu;
+    public TableDataBaoCao1(String maKho, String tenKho, int soLoaiVatTu) {
+        this.maKho = maKho;
+        this.tenKho = tenKho;
+        this.soLoaiVatTu = soLoaiVatTu;
     }
 
     public String getMaKho() {

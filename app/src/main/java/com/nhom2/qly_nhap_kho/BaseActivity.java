@@ -3,6 +3,7 @@ package com.nhom2.qly_nhap_kho;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -37,4 +38,6 @@ public class BaseActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
+
 }
