@@ -14,6 +14,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -75,12 +77,13 @@ public class VatTuActivity extends AppCompatActivity {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_themvattu);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        EditText editMaVT = (EditText) dialog.findViewById(R.id.editMaVatTu);
-        EditText editTenVT = (EditText) dialog.findViewById(R.id.editTenVatTu);
-        EditText editXuatXu = (EditText) dialog.findViewById(R.id.editXuatXu);
-        Button btnThem = (Button) dialog.findViewById(R.id.btnThemVatTu);
-        Button btnHuy = (Button) dialog.findViewById(R.id.btnHuyVatTu);
+        EditText editMaVT = dialog.findViewById(R.id.editMaVatTu);
+        EditText editTenVT = dialog.findViewById(R.id.editTenVatTu);
+        EditText editXuatXu = dialog.findViewById(R.id.editXuatXu);
+        TextView btnThem = dialog.findViewById(R.id.btnThemVatTu);
+        TextView btnHuy = dialog.findViewById(R.id.btnHuyVatTu);
 
 
         btnThem.setOnClickListener(new View.OnClickListener() {
@@ -141,14 +144,16 @@ public class VatTuActivity extends AppCompatActivity {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_suavattu);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
         //anh xa
-        EditText editSuaMaVatTu = (EditText) dialog.findViewById(R.id.editSuaMaVatTu);
-        EditText editSuaTenVatTu = (EditText) dialog.findViewById(R.id.editSuaTenVatTu);
-        EditText editSuaXuatXu = (EditText) dialog.findViewById(R.id.editSuaXuatXu);
+        EditText editSuaMaVatTu = dialog.findViewById(R.id.editSuaMaVatTu);
+        EditText editSuaTenVatTu = dialog.findViewById(R.id.editSuaTenVatTu);
+        EditText editSuaXuatXu = dialog.findViewById(R.id.editSuaXuatXu);
 
-        Button btnSuaVatTu = (Button) dialog.findViewById(R.id.btnSuaVatTu);
-        Button btnXoaVatTu = (Button) dialog.findViewById(R.id.btnXoaVatTu);
+        TextView btnSuaVatTu = dialog.findViewById(R.id.btnSuaVatTu);
+        TextView btnXoaVatTu = dialog.findViewById(R.id.btnXoaVatTu);
 
 
         //set du lieu
@@ -188,7 +193,7 @@ public class VatTuActivity extends AppCompatActivity {
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
-        private Paint paint = new Paint();
+        private final Paint paint = new Paint();
         @Override
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             Toast.makeText(VatTuActivity.this, "on Move", Toast.LENGTH_SHORT).show();

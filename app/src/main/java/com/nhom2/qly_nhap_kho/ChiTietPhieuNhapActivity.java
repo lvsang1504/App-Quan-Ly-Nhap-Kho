@@ -48,7 +48,7 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
 
     NhapKhoHelper nhapKhoHelper;
     TextView txtTitle;
-    Button buttonReport, btn_them_chi_tiet_pn;
+    TextView buttonReport, btn_them_chi_tiet_pn;
     RadioButton radioButton1, radioButton2;
 
     String id = "";
@@ -77,7 +77,6 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtTitle);
         buttonReport = findViewById(R.id.buttonReport);
         btn_them_chi_tiet_pn = findViewById(R.id.btn_them_chi_tiet_pn);
-
 
         txtTitle.setText("Thông tin vật tư nhập kho của phiếu số " + id);
 
@@ -128,8 +127,8 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
 
         EditText editSL = dialog.findViewById(R.id.editSL);
         EditText editDVT = dialog.findViewById(R.id.editDVT);
-        Button btnThem = dialog.findViewById(R.id.btnThem);
-        Button btnHuy = dialog.findViewById(R.id.btnHuy);
+        TextView btnThem = dialog.findViewById(R.id.btnThem);
+        TextView btnHuy = dialog.findViewById(R.id.btnHuy);
 
         //them du lieu vao spinner
         Spinner spinnerVT = dialog.findViewById(R.id.spinnerVT);
