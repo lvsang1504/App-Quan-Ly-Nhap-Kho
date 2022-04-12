@@ -19,22 +19,30 @@ import java.util.List;
 public class ChiTietBaoCao3Activity extends AppCompatActivity {
     NhapKhoHelper nhapKhoHelper;
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_bao_cao3);
 
-        nhapKhoHelper=new NhapKhoHelper(this);
-        TableViewAdapterBaoCao3 tableViewAdapterBaoCao3=new TableViewAdapterBaoCao3(getList());
-        recyclerView = findViewById(R.id.recyclerViewBaoCao3);
+        nhapKhoHelper = new NhapKhoHelper(this);
+        TableViewAdapterBaoCao3 tableViewAdapterBaoCao3 = new TableViewAdapterBaoCao3(getList());
+        setControl();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerView.setAdapter(tableViewAdapterBaoCao3);
     }
+
+    private void setControl() {
+        recyclerView = findViewById(R.id.recyclerViewBaoCao3);
+    }
+
     private List<TableDataBaoCao3> getList() {
         List<TableDataBaoCao3> list = new ArrayList<>();
-        Cursor dataBaoCao3 = nhapKhoHelper.GetData("SELECT distinct pn.SoPhieu,pn.NgayLap,k.TenKho\n" +
+
+        String query = "SELECT distinct pn.SoPhieu,pn.NgayLap,k.TenKho\n" +
                 "                    FROM PhieuNhap pn, ChiTietPhieuNhap ctpn,Kho k\n" +
                 "                    WHERE k.MaKho=pn.MaKho AND pn.SoPhieu=ctpn.SoPhieu AND ctpn.MaVT ='GO'\n" +
                 "\n" +
@@ -42,15 +50,15 @@ public class ChiTietBaoCao3Activity extends AppCompatActivity {
                 "\n" +
                 "                    SELECT distinct pn.SoPhieu,pn.NgayLap,k.TenKho\n" +
                 "                    FROM PhieuNhap pn, ChiTietPhieuNhap ctpn,Kho k\n" +
-                "                    WHERE k.MaKho=pn.MaKho AND pn.SoPhieu=ctpn.SoPhieu AND ctpn.MaVT ='GT'");
+                "                    WHERE k.MaKho=pn.MaKho AND pn.SoPhieu=ctpn.SoPhieu AND ctpn.MaVT ='GT'";
 
-        TableDataBaoCao3 tableDataBaoCao3;
-        while (dataBaoCao3.moveToNext()) {
-            tableDataBaoCao3 = new TableDataBaoCao3(
-                    Integer.valueOf(dataBaoCao3.getString(0)),
-                    dataBaoCao3.getString(1),
-                    dataBaoCao3.getString(2));
-            list.add(tableDataBaoCao3);
+        Cursor cursor = nhapKhoHelper.GetData(query);
+
+        while (cursor.moveToNext()) {
+            list.add(new TableDataBaoCao3(
+                    Integer.valueOf(cursor.getString(0)),
+                    cursor.getString(1),
+                    cursor.getString(2)));
         }
         return list;
     }

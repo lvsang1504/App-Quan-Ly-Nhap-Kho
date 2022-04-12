@@ -1,9 +1,9 @@
 package com.nhom2.qly_nhap_kho.dao;
 
 public class TableDataBaoCao3 {
-    public int soPhieu;
-    public String ngayLap;
-    public String tenKho;
+    private int soPhieu;
+    private String ngayLap;
+    private String tenKho;
 
     public TableDataBaoCao3(int soPhieu, String ngayLap, String tenKho) {
         this.soPhieu = soPhieu;

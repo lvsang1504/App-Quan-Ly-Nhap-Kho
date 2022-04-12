@@ -2,6 +2,8 @@ package com.nhom2.qly_nhap_kho.adapter;
 
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +17,6 @@ import com.nhom2.qly_nhap_kho.dao.TableDataBaoCao1;
 import com.nhom2.qly_nhap_kho.dao.TableDataBaoCao3;
 
 import java.util.List;
-
-/**
- * Created by Azhar Rivaldi on 03/11/2019.
- */
 
 public class TableViewAdapterBaoCao3 extends RecyclerView.Adapter {
 
@@ -42,29 +40,39 @@ public class TableViewAdapterBaoCao3 extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         RowViewHolder rowViewHolder = (RowViewHolder) holder;
+        TextView tvSoPhieu = rowViewHolder.tvSoPhieu;
+        TextView tvNgayLap = rowViewHolder.tvNgayLap;
+        TextView tvTenKho = rowViewHolder.tvTenKho;
 
         int rowPos = rowViewHolder.getAdapterPosition();
+        int resid;
 
         if (rowPos == 0) {
+            resid = R.drawable.table_header_cell_bg;
 
-            rowViewHolder.txtBaoCao3SoPhieu.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtBaoCao3NgayLap.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtBaoCao3TenKho.setBackgroundResource(R.drawable.table_header_cell_bg);
-
-            rowViewHolder.txtBaoCao3SoPhieu.setText("Số phiếu");
-            rowViewHolder.txtBaoCao3NgayLap.setText("Ngày lập");
-            rowViewHolder.txtBaoCao3TenKho.setText("Tên kho");
+            setColumnHeaderProperties(tvSoPhieu, "Số phiếu", resid);
+            setColumnHeaderProperties(tvNgayLap, "Ngày lập", resid);
+            setColumnHeaderProperties(tvTenKho, "Tên kho", resid);
         } else {
             TableDataBaoCao3 modal = list.get(rowPos - 1);
+            resid = R.drawable.table_content_cell_bg;
 
-            rowViewHolder.txtBaoCao3SoPhieu.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtBaoCao3NgayLap.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtBaoCao3TenKho.setBackgroundResource(R.drawable.table_content_cell_bg);
-
-            rowViewHolder.txtBaoCao3SoPhieu.setText(modal.soPhieu+"");
-            rowViewHolder.txtBaoCao3NgayLap.setText(modal.ngayLap);
-            rowViewHolder.txtBaoCao3TenKho.setText(modal.tenKho);
+            setRowProperties(tvSoPhieu, modal.getSoPhieu() + "", resid);
+            setRowProperties(tvNgayLap, modal.getNgayLap() + "", resid);
+            setRowProperties(tvTenKho, modal.getTenKho(), resid);
         }
+    }
+
+    public static void setColumnHeaderProperties(TextView textView, String text, int resid) {
+        textView.setBackgroundResource(resid);
+        textView.setTextColor(Color.WHITE);
+        textView.setGravity(Gravity.CENTER);
+        textView.setText(text);
+    }
+
+    public static void setRowProperties(TextView textView, String text, int resid) {
+        textView.setBackgroundResource(resid);
+        textView.setText(text);
     }
 
     @Override
@@ -73,15 +81,15 @@ public class TableViewAdapterBaoCao3 extends RecyclerView.Adapter {
     }
 
     public class RowViewHolder extends RecyclerView.ViewHolder {
-        TextView txtBaoCao3SoPhieu;
-        TextView txtBaoCao3NgayLap;
-        TextView txtBaoCao3TenKho;
+        TextView tvSoPhieu;
+        TextView tvNgayLap;
+        TextView tvTenKho;
 
         RowViewHolder(View itemView) {
             super(itemView);
-            txtBaoCao3SoPhieu = itemView.findViewById(R.id.txtBaoCao3SoPhieu);
-            txtBaoCao3NgayLap = itemView.findViewById(R.id.txtBaoCao3NgayLap);
-            txtBaoCao3TenKho = itemView.findViewById(R.id.txtBaoCao3TenKho);
+            tvSoPhieu = itemView.findViewById(R.id.txtBaoCao3SoPhieu);
+            tvNgayLap = itemView.findViewById(R.id.txtBaoCao3NgayLap);
+            tvTenKho = itemView.findViewById(R.id.txtBaoCao3TenKho);
         }
     }
 }
