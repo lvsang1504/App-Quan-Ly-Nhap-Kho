@@ -23,9 +23,6 @@ public class BaseActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(toolbarId);
         toolbar.setBackgroundColor(getResources().getColor(colorBg));
         setSupportActionBar(toolbar);
-//        TextView pageTitle = (TextView) toolbar.findViewById(R.id.toolbar);
-//        pageTitle.setText(title);
-//        pageTitle.setTextColor(getResources().getColor(titleColor));
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(burger);

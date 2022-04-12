@@ -59,12 +59,53 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Tao bang
-        db.execSQL("CREATE TABLE IF NOT EXISTS User(ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME VARCHAR(100),LASTNAME VARCHAR(100),EMAIL VARCHAR(100), PASSWORD VARCHAR(100), IMAGE VARCHAR(5000))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS Kho(MaKho VARCHAR(5),TenKho VARCHAR(100))");
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS PhieuNhap(SoPhieu INTEGER ,NgayLap VARCHAR,MaKho VARCHAR(5))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS ChiTietPhieuNhap(SoPhieu INTEGER,MaVT VARCHAR,DVT VARCHAR, SoLuong INTEGER)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS VatTu(MaVT VARCHAR, TenVT VARCHAR,XuatXu VARCHAR)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " +
+                "VatTu" +
+                "(MaVT VARCHAR PRIMARY KEY" +
+                ", TenVT VARCHAR" +
+                ",XuatXu VARCHAR)" +
+                "");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " +
+                "User(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "FIRSTNAME VARCHAR(100)," +
+                "LASTNAME VARCHAR(100)," +
+                "EMAIL VARCHAR(100), " +
+                "PASSWORD VARCHAR(100), I" +
+                "MAGE VARCHAR(5000))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Kho(" +
+                "MaKho VARCHAR(5) PRIMARY KEY" +
+                ",TenKho VARCHAR(100))" +
+                "");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS PhieuNhap" +
+                "(SoPhieu INTEGER PRIMARY KEY" +
+                ",NgayLap VARCHAR" +
+                ",MaKho VARCHAR(5)" +
+                ", FOREIGN KEY (MaKho)" +
+                " REFERENCES Kho (MaKho)" +
+                ")");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " +
+                "ChiTietPhieuNhap" +
+                "(SoPhieu INTEGER " +
+                ",MaVT VARCHAR" +
+                ",DVT VARCHAR" +
+                ",SoLuong INTEGER" +
+
+                ",FOREIGN KEY (SoPhieu)" +
+                " REFERENCES PhieuNhap(SoPhieu)" +
+                ",FOREIGN KEY (MaVT)" +
+                " REFERENCES VatTu (MaVT) "+
+                ",PRIMARY KEY(SoPhieu, MaVT))" );
+
+
+
+        //Them du lieu VatTu
+        db.execSQL("INSERT INTO VatTu VALUES ('GO','Gạch ống', 'Đồng Nai')");
+        db.execSQL("INSERT INTO VatTu VALUES ('GT','Gạch thẻ', 'Long An')");
+        db.execSQL("INSERT INTO VatTu VALUES ('SA','Sắt tròn', 'Bình Dương')");
+        db.execSQL("INSERT INTO VatTu VALUES ('SO','Sơn dầu', 'Tiền Giang')");
+        db.execSQL("INSERT INTO VatTu VALUES ('XM','Xi măng', 'Hà Tiên')");
 
         //Them du lieu
         db.execSQL("INSERT INTO Kho VALUES ('K1','Bình Chánh')");
@@ -73,33 +114,28 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
 
         //user
 
-        db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','admin@gmail.com','123456')");
+        db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','a','1')");
 
         //Them du lieu phieu nhap
-        db.execSQL("INSERT INTO PhieuNhap VALUES ('1','20/06/2013', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES ('2','07/07/2013', 'K2')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES ('3','02/01/2014', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES ('4','05/03/2014', 'K3')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES ('5','25/05/2014', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (1,'20/06/2013', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (2,'07/07/2013', 'K2')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (3,'02/01/2014', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (4,'05/03/2014', 'K3')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (5,'25/05/2014', 'K1')");
 
         //Them du lieu chi tiet phieu nhap
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('1','GO', 'Viên', '5000')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('1','GT', 'Viên', '2000')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('1','XM', 'Bao', '150')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('2','SO', 'Thùng', '75')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('3','SA', 'Tấn', '25')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('3','XM', 'Bao', '100')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('4','GO', 'Viên', '10000')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('4','SA', 'Tấn', '50')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('5','SO', 'Thùng', '240')");
-        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES ('5','XM', 'Bao', '430')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (1,'GO', 'Viên', '5000')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (1,'GT', 'Viên', '2000')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (1,'XM', 'Bao', '150')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (2,'SO', 'Thùng', '75')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (3,'SA', 'Tấn', '25')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (3,'XM', 'Bao', '100')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (4,'GO', 'Viên', '10000')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (4,'SA', 'Tấn', '50')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (5,'SO', 'Thùng', '240')");
+        db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (5,'XM', 'Bao', '430')");
 
-        //Them du lieu VatTu
-        db.execSQL("INSERT INTO VatTu VALUES ('GO','Gạch ống', 'Đồng Nai')");
-        db.execSQL("INSERT INTO VatTu VALUES ('GT','Gạch thẻ', 'Long An')");
-        db.execSQL("INSERT INTO VatTu VALUES ('SA','Sắt tròn', 'Bình Dương')");
-        db.execSQL("INSERT INTO VatTu VALUES ('SO','Sơn dầu', 'Tiền Giang')");
-        db.execSQL("INSERT INTO VatTu VALUES ('XM','Xi măng', 'Hà Tiên')");
+
     }
 
     @Override

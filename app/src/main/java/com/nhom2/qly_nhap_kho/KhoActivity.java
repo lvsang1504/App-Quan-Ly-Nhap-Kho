@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.database.Cursor;
@@ -15,13 +16,16 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KhoActivity extends AppCompatActivity {
-    NhapKhoHelper  nhapKhoHelper;
+    NhapKhoHelper nhapKhoHelper;
     KhoAdapter khoAdapter;
     RecyclerView recyclerViewKho;
     List<Kho> arrayKho = new ArrayList<>();
@@ -46,7 +50,7 @@ public class KhoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kho);
-        nhapKhoHelper =  NhapKhoHelper.getInstance(this);
+        nhapKhoHelper = NhapKhoHelper.getInstance(this);
         anhXa();
         actionGetData();
 
@@ -66,8 +70,9 @@ public class KhoActivity extends AppCompatActivity {
 
     }
 
-    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
-        private Paint paint = new Paint();
+    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        private final Paint paint = new Paint();
+
         @Override
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             Toast.makeText(KhoActivity.this, "on Move", Toast.LENGTH_SHORT).show();
@@ -98,13 +103,13 @@ public class KhoActivity extends AppCompatActivity {
 
             float translationX = dX;
             View itemView = viewHolder.itemView;
-            float height = (float)itemView.getBottom() - (float)itemView.getTop();
+            float height = (float) itemView.getBottom() - (float) itemView.getTop();
 
             if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX <= 0) // Swiping Left
             {
                 translationX = -Math.min(-dX, height * 2);
                 paint.setColor(Color.RED);
-                RectF background = new RectF((float)itemView.getRight() + translationX, (float)itemView.getTop(), (float)itemView.getRight(), (float)itemView.getBottom());
+                RectF background = new RectF((float) itemView.getRight() + translationX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
                 c.drawRect(background, paint);
 
                 paint.setColor(Color.WHITE);
@@ -118,13 +123,12 @@ public class KhoActivity extends AppCompatActivity {
                 double y = background.height() / 2 + titleBounds.height() / 2 - titleBounds.bottom;
                 c.drawText(title, background.left + 80, (float) (background.top + y), paint);
                 //viewHolder.ItemView.TranslationX = translationX;
-            }
-            else if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX > 0) // Swiping Right
+            } else if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX > 0) // Swiping Right
             {
                 translationX = Math.min(dX, height * 2);
                 paint.setColor(Color.RED);
 
-                RectF background = new RectF((float)itemView.getRight() + translationX, (float)itemView.getTop(), (float)itemView.getRight(), (float)itemView.getBottom());
+                RectF background = new RectF((float) itemView.getRight() + translationX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
                 c.drawRect(background, paint);
 
                 paint.setColor(Color.WHITE);
@@ -137,7 +141,6 @@ public class KhoActivity extends AppCompatActivity {
 
                 double y = background.height() / 2 + background.height() / 2 - titleBounds.bottom;
                 c.drawText(title, background.left + 50, (float) (background.top + y), paint);
-
 
 
             }
@@ -154,14 +157,17 @@ public class KhoActivity extends AppCompatActivity {
     }
 
     public void dialogInsert() {
+
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog_themkho);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        EditText editMaKho = (EditText) dialog.findViewById(R.id.editMaKho);
-        EditText editTenKho = (EditText) dialog.findViewById(R.id.editTenKho);
-        Button btnThem = (Button) dialog.findViewById(R.id.btnThemKho);
-        Button btnHuy = (Button) dialog.findViewById(R.id.btnHuyKho);
+        EditText editMaKho = dialog.findViewById(R.id.editMaKho);
+        EditText editTenKho = dialog.findViewById(R.id.editTenKho);
+        TextView btnThem = dialog.findViewById(R.id.btnThemKho);
+        TextView btnHuy = dialog.findViewById(R.id.btnHuyKho);
 
 
         btnThem.setOnClickListener(new View.OnClickListener() {
@@ -218,17 +224,18 @@ public class KhoActivity extends AppCompatActivity {
     }
 
     public void dialogUpdate(String maKho, String tenKho) {
-
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_suakho);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
         //anh xa
-        EditText editSuaMaKho = (EditText) dialog.findViewById(R.id.editSuaMaKho);
-        EditText editSuaTenKho = (EditText) dialog.findViewById(R.id.editSuaTenKho);
+        EditText editSuaMaKho = dialog.findViewById(R.id.editSuaMaKho);
+        EditText editSuaTenKho = dialog.findViewById(R.id.editSuaTenKho);
 
-        Button btnSuaKho = (Button) dialog.findViewById(R.id.btnSuaKho);
-        Button btnXoaKho = (Button) dialog.findViewById(R.id.btnXoaKho);
+        TextView btnSuaKho = dialog.findViewById(R.id.btnHuyKho);
+        TextView btnXoaKho = dialog.findViewById(R.id.btnCapNhat);
 
 
         //set du lieu
@@ -276,11 +283,11 @@ public class KhoActivity extends AppCompatActivity {
 
     private void actionGetData() {
         arrayKho.clear();
-        String searchKho=editTextSearchKho.getText().toString();
+        String searchKho = editTextSearchKho.getText().toString();
         Cursor dataKho;
-        if(searchKho!=""){
-            dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho WHERE TenKho LIKE '%"+searchKho+"%'");
-        }else{
+        if (searchKho != "") {
+            dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho WHERE TenKho LIKE '%" + searchKho + "%'");
+        } else {
             dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho");
         }
 

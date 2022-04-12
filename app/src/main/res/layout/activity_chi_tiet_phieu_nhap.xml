@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,18 +8,29 @@
     android:weightSum="10"
     tools:context=".ChiTietPhieuNhapActivity">
 
+    <ImageView
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dashbord_bacground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:id="@+id/llViewTitle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
@@ -28,12 +39,14 @@
             android:src="@drawable/ic_back" />
 
         <TextView
-            android:layout_toRightOf="@id/btnBack"
             android:id="@+id/txtTitle"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="16dp"
+            android:layout_toEndOf="@+id/btnBack"
+            android:layout_toRightOf="@id/btnBack"
             android:gravity="center"
             android:text="Table RecyclerView"
             android:textAlignment="center"
@@ -43,16 +56,17 @@
     </RelativeLayout>
 
     <ScrollView
-        android:layout_weight="5"
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="313dp"
         android:layout_below="@+id/llViewTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_marginTop="20dp"
+        android:layout_weight="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llViewTitle">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDeliveryProductList"
@@ -62,38 +76,43 @@
             tools:listitem="@layout/table_list_item" />
 
     </ScrollView>
-    <LinearLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_them_chi_tiet_pn"
-            android:background="@drawable/boder_spinner"
-            android:text="Thêm chi tiết phiếu nhập"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_weight="3"
-        android:orientation="horizontal"
+    <TextView
+        android:id="@+id/btn_them_chi_tiet_pn"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/background_button_yes"
+        android:text="Thêm chi tiết phiếu nhập"
+        android:textAllCaps="true"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="3"
         android:gravity="center"
-        android:layout_height="0dp">
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_them_chi_tiet_pn">
+
         <RadioGroup
-            android:layout_weight="3"
-            android:layout_below="@id/scrollView"
-            android:layout_margin="20dp"
             android:id="@+id/myRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_below="@id/scrollView"
+            android:layout_margin="20dp"
+            android:layout_weight="3"
             android:background="@color/grey"
             android:checkedButton="@+id/sound"
-            >
+            android:padding="10dp">
 
             <RadioButton
                 android:id="@+id/rdInVatTu"
@@ -107,17 +126,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="In chi tiết phiếu nhập kho" />
-
-
         </RadioGroup>
 
-        <Button
+        <TextView
+            android:padding="12dp"
             android:id="@+id/buttonReport"
-            android:background="@drawable/boder_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_button_yes"
             android:text="In báo cáo"
             android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/black" />
     </LinearLayout>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

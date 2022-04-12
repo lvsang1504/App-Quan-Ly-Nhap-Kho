@@ -18,6 +18,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -64,7 +65,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
                 PackageManager.PERMISSION_GRANTED);
 
 
-        spinnerKho = (Spinner) findViewById(R.id.spinner1);
+        spinnerKho = findViewById(R.id.spinner1);
         recycleView = findViewById(R.id.recycleView);
         txtTongPhieuNhap = findViewById(R.id.txtTongPhieuNhap);
         floatingActionButton = findViewById(R.id.floatingActionButton);
@@ -117,7 +118,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-        private Paint paint = new Paint();
+        private final Paint paint = new Paint();
 
         @Override
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -274,12 +275,13 @@ public class PhieuNhapActivity extends AppCompatActivity {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_suaphieunhap);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //anh xa
-        EditText editSoPhieu = (EditText) dialog.findViewById(R.id.editSoPhieu);
-        EditText editNgayLap = (EditText) dialog.findViewById(R.id.editNgayLap);
-        Button btnHoanTat = (Button) dialog.findViewById(R.id.btnHoanTat);
-        Button btnXoa = (Button) dialog.findViewById(R.id.btnXoa);
+        EditText editSoPhieu = dialog.findViewById(R.id.editSoPhieu);
+        EditText editNgayLap = dialog.findViewById(R.id.editNgayLap);
+        TextView btnHoanTat = dialog.findViewById(R.id.btnHoanTat);
+        TextView btnXoa = dialog.findViewById(R.id.btnXoa);
 
         //them du lieu vao spinner
         Spinner spinnerMaKho = dialog.findViewById(R.id.spinnerMaKho);
@@ -304,7 +306,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String ngayLapMoi = String.valueOf(editNgayLap.getText());
-                String maKhoMoi = String.valueOf(spinnerMaKho.getSelectedItem().toString());
+                String maKhoMoi = spinnerMaKho.getSelectedItem().toString();
                 if (TextUtils.isEmpty(ngayLapMoi) || TextUtils.isEmpty(maKhoMoi)) {
                     Toast.makeText(PhieuNhapActivity.this, "Nội dung cần sửa chưa được nhập", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -332,11 +334,12 @@ public class PhieuNhapActivity extends AppCompatActivity {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_themphieunhap);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        EditText editSoPhieu2 = (EditText) dialog.findViewById(R.id.editSoPhieu2);
-        EditText editNgayLap2 = (EditText) dialog.findViewById(R.id.editNgayLap2);
-        Button btnThem = (Button) dialog.findViewById(R.id.btnThem);
-        Button btnHuy = (Button) dialog.findViewById(R.id.btnHuy);
+        EditText editSoPhieu2 = dialog.findViewById(R.id.editSoPhieu2);
+        EditText editNgayLap2 = dialog.findViewById(R.id.editNgayLap2);
+        TextView btnThem = dialog.findViewById(R.id.btnThem);
+        TextView btnHuy = dialog.findViewById(R.id.btnHuy);
 
         //them du lieu vao spinner
         Spinner spinnerMaKho2 = dialog.findViewById(R.id.spinnerMaKho2);

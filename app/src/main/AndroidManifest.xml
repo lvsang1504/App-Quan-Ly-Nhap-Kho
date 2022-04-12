@@ -36,7 +36,8 @@
         </activity>
         <activity
             android:name=".KhoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Qly_nhap_kho"/>
         <activity
             android:name=".ChiTietBaoCao3Activity"
             android:exported="false" />
