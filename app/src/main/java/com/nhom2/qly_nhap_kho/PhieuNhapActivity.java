@@ -129,7 +129,11 @@ public class PhieuNhapActivity extends AppCompatActivity {
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
             int position = viewHolder.getAdapterPosition();
-//
+            Cursor data = helper.GetData("SELECT * FROM ChiTietPhieuNhap WHERE SoPhieu='" + arrayPhieuNhap.get(position).getSoPhieu() + "'");
+            while (data.moveToNext()) {
+                Toast.makeText(PhieuNhapActivity.this, "Phiếu nhập có vật tư nên không thể xóa", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Toast.makeText(PhieuNhapActivity.this, "Xóa thành công " + arrayPhieuNhap.get(position).getSoPhieu(), Toast.LENGTH_SHORT).show();
             //Remove swiped item from list and notify the RecyclerView
 
@@ -321,6 +325,11 @@ public class PhieuNhapActivity extends AppCompatActivity {
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Cursor data = helper.GetData("SELECT * FROM ChiTietPhieuNhap WHERE SoPhieu='" + soPhieu + "'");
+                while (data.moveToNext()) {
+                    Toast.makeText(PhieuNhapActivity.this, "Phiếu nhập có vật tư nên không thể xóa", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 helper.QueryData("DELETE FROM PhieuNhap WHERE SoPhieu='" + soPhieu + "'");
                 dialog.dismiss();
                 actionGetData();

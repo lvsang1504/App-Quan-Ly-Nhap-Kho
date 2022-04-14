@@ -183,6 +183,11 @@ public class VatTuActivity extends AppCompatActivity {
         btnXoaVatTu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Cursor data = nhapKhoHelper.GetData("SELECT * FROM ChiTietPhieuNhap WHERE MaVT='" + maVT + "'");
+                while (data.moveToNext()) {
+                    Toast.makeText(VatTuActivity.this, "Vật tư đã có trong chi tiết không thể xóa", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 nhapKhoHelper.QueryData("DELETE FROM VatTu WHERE MaVT='" + maVT + "'");
                 dialog.dismiss();
                 actionGetData();
@@ -202,9 +207,15 @@ public class VatTuActivity extends AppCompatActivity {
 
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            int position = viewHolder.getAdapterPosition();
+            Cursor data = nhapKhoHelper.GetData("SELECT * FROM ChiTietPhieuNhap WHERE MaVT='" + arrayVatTu.get(position).getMaVT() + "'");
+            while (data.moveToNext()) {
+                Toast.makeText(VatTuActivity.this, "Vật tư đã có trong chi tiết không thể xóa", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Toast.makeText(VatTuActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
             //Remove swiped item from list and notify the RecyclerView
-            int position = viewHolder.getAdapterPosition();
+
 
             nhapKhoHelper.QueryData("DELETE FROM VatTu WHERE MaVT='" + arrayVatTu.get(position).getMaVT() + "'");
             arrayVatTu.remove(position);
