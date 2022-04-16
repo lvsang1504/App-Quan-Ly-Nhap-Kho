@@ -1,5 +1,7 @@
 package com.nhom2.qly_nhap_kho.adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,23 +12,26 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nhom2.qly_nhap_kho.ChiTietPhieuNhapActivity;
 import com.nhom2.qly_nhap_kho.R;
-import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
+import com.nhom2.qly_nhap_kho.model.Kho;
 import com.nhom2.qly_nhap_kho.model.PhieuNhap;
 import com.nhom2.qly_nhap_kho.PhieuNhapActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhieuNhapAdapter extends RecyclerView.Adapter<PhieuNhapViewHolder> {
 
     PhieuNhapActivity context;
     List<PhieuNhap> list;
-    PhieuNhapListener listener;
+    Kho kho;
 
-    public PhieuNhapAdapter(PhieuNhapActivity context, List<PhieuNhap> list, PhieuNhapListener listener) {
+
+    public PhieuNhapAdapter(PhieuNhapActivity context, List<PhieuNhap> list, Kho kho) {
         this.context = context;
         this.list = list;
-        this.listener = listener;
+        this.kho = kho;
     }
 
     @NonNull
@@ -44,7 +49,18 @@ public class PhieuNhapAdapter extends RecyclerView.Adapter<PhieuNhapViewHolder> 
             @Override
             public void onClick(View v) {
                 Log.d("ddd", String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu));
-                listener.onPhieuNhapClicked(String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu), list.get(holder.getAdapterPosition()));
+                Intent intent = new Intent(context, ChiTietPhieuNhapActivity.class);
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("id", list.get(position).getSoPhieu()+"");
+                bundle.putSerializable("phieuNhap", list.get(position));
+                bundle.putSerializable("kho", kho);
+
+                intent.putExtra("data", bundle);
+
+                context.startActivity(intent);
+                //listener.onPhieuNhapClicked(String.valueOf(list.get(holder.getAdapterPosition()).SoPhieu), list.get(holder.getAdapterPosition()));
             }
         });
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {

@@ -34,7 +34,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nhom2.qly_nhap_kho.adapter.PhieuNhapAdapter;
-import com.nhom2.qly_nhap_kho.listener.PhieuNhapListener;
+import com.nhom2.qly_nhap_kho.adapter.SpinnerKhoAdapter;
 import com.nhom2.qly_nhap_kho.model.Kho;
 import com.nhom2.qly_nhap_kho.model.PhieuNhap;
 
@@ -83,8 +83,9 @@ public class PhieuNhapActivity extends AppCompatActivity {
             arrayKho.add(kho);
             arrayTenKho.add(kho.getTenKho());
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTenKho);
-        spinnerKho.setAdapter(arrayAdapter);
+        //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTenKho);
+        SpinnerKhoAdapter adapter=new SpinnerKhoAdapter(this,R.layout.custom_pinner,arrayTenKho);
+        spinnerKho.setAdapter(adapter);
 
 
     }
@@ -115,6 +116,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
     private void setControl() {
@@ -254,7 +256,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
         recycleView.setHasFixedSize(true);
         recycleView.setLayoutManager(new LinearLayoutManager(PhieuNhapActivity.this, LinearLayoutManager.VERTICAL, false));
 
-        phieuNhapAdapter = new PhieuNhapAdapter(PhieuNhapActivity.this, arrayPhieuNhap, phieuNhapListener);
+        phieuNhapAdapter = new PhieuNhapAdapter(PhieuNhapActivity.this, arrayPhieuNhap,kho);
         recycleView.setAdapter(phieuNhapAdapter);
     }
 
@@ -264,23 +266,6 @@ public class PhieuNhapActivity extends AppCompatActivity {
         helper.close();
     }
 
-    private final PhieuNhapListener phieuNhapListener = new PhieuNhapListener() {
-        @Override
-        public void onPhieuNhapClicked(String id, PhieuNhap phieuNhap) {
-
-            Intent intent = new Intent(PhieuNhapActivity.this, ChiTietPhieuNhapActivity.class);
-
-            Bundle bundle = new Bundle();
-
-            bundle.putString("id", id);
-            bundle.putSerializable("phieuNhap", phieuNhap);
-            bundle.putSerializable("kho", kho);
-
-            intent.putExtra("data", bundle);
-
-            startActivity(intent);
-        }
-    };
 
     public void dialogUpdate(int soPhieu, String ngayLap, String maKho) {
 
