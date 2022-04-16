@@ -42,18 +42,17 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        inputFirstName = findViewById(R.id.inputFirstName);
-        inputLastName = findViewById(R.id.inputLastName);
-        inputEmail = findViewById(R.id.inputEmail);
-        inputPassword = findViewById(R.id.inputPassword);
-        inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
-        buttonSignUp = findViewById(R.id.buttonSignUp);
-        layoutImage = findViewById(R.id.layoutImage);
-        imageProfile = findViewById(R.id.imageProfile);
-        textAddImage = findViewById(R.id.textAddImage);
+        setControl();
+
 
         helper = NhapKhoHelper.getInstance(this);
+        setEvent();
 
+
+
+    }
+
+    private void setEvent() {
         layoutImage.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -72,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                             inputEmail.getText().toString().trim(),
                             inputPassword.getText().toString().trim(),
                             encodedImage
-                            );
+                    );
                     int i = helper.addUser(user);
                     if (i == 1) {
                         showToast("Email đã tồn tại!");
@@ -85,8 +84,18 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-
+    private void setControl() {
+        inputFirstName = findViewById(R.id.inputFirstName);
+        inputLastName = findViewById(R.id.inputLastName);
+        inputEmail = findViewById(R.id.inputEmail);
+        inputPassword = findViewById(R.id.inputPassword);
+        inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
+        buttonSignUp = findViewById(R.id.buttonSignUp);
+        layoutImage = findViewById(R.id.layoutImage);
+        imageProfile = findViewById(R.id.imageProfile);
+        textAddImage = findViewById(R.id.textAddImage);
     }
 
     public void signIn(View view) {

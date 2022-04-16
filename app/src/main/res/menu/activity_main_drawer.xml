@@ -19,7 +19,10 @@
         android:id="@+id/nav_vat_tu"
         android:icon="@drawable/ic_vat_tu"
         android:title="Vật tu" />
-
+    <item
+        android:id="@+id/nav_chart"
+        android:icon="@drawable/ic_vat_tu"
+        android:title="Biểu đồ" />
     <item android:title="Profile">
         <menu>
             <item

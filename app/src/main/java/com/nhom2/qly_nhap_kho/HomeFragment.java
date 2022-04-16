@@ -29,20 +29,19 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        setControl(view);
 
-        textHeader = view.findViewById(R.id.textHeader);
-        textEmail = view.findViewById(R.id.textEmail);
-        btnSignOut = view.findViewById(R.id.btnSignOut);
-        profileImage = view.findViewById(R.id.profileImage);
-        khoCard = view.findViewById(R.id.khoCard);
-        phieuNhapCard = view.findViewById(R.id.phieuNhapCard);
-        vatTuCard = view.findViewById(R.id.vatTuCard);
-        baoCaoCard = view.findViewById(R.id.baoCaoCard);
 
         preferenceManager = new PreferenceManager(getContext());
 
         loadUserDetails();
+        setEvent();
 
+
+        return view;
+    }
+
+    private void setEvent() {
         btnSignOut.setOnClickListener(v -> signOut());
 
         khoCard.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +72,17 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
 
-        return view;
+    private void setControl(View view) {
+        textHeader = view.findViewById(R.id.textHeader);
+        textEmail = view.findViewById(R.id.textEmail);
+        btnSignOut = view.findViewById(R.id.btnSignOut);
+        profileImage = view.findViewById(R.id.profileImage);
+        khoCard = view.findViewById(R.id.khoCard);
+        phieuNhapCard = view.findViewById(R.id.phieuNhapCard);
+        vatTuCard = view.findViewById(R.id.vatTuCard);
+        baoCaoCard = view.findViewById(R.id.baoCaoCard);
     }
 
     private void loadUserDetails() {

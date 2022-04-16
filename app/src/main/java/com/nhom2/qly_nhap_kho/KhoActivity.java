@@ -51,9 +51,13 @@ public class KhoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kho);
         nhapKhoHelper = NhapKhoHelper.getInstance(this);
-        anhXa();
+        setControl();
         actionGetData();
+        setEvent();
 
+    }
+
+    private void setEvent() {
         floatingActionButtonKho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +71,6 @@ public class KhoActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -150,7 +153,7 @@ public class KhoActivity extends AppCompatActivity {
         }
     };
 
-    private void anhXa() {
+    private void setControl() {
         editTextSearchKho = findViewById(R.id.editTextSearchKho);
         recyclerViewKho = findViewById(R.id.recyclerViewKho);
         floatingActionButtonKho = findViewById(R.id.floatingActionButtonKho);

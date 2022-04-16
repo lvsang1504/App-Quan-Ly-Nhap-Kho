@@ -72,17 +72,12 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
             phieuNhap = (PhieuNhap) bundle.getSerializable("phieuNhap");
             kho = (Kho) bundle.getSerializable("kho");
         }
-        radioButton1 = findViewById(R.id.rdInVatTu);
-        radioButton2 = findViewById(R.id.rdInPhieuNhap);
-        txtTitle = findViewById(R.id.txtTitle);
-        buttonReport = findViewById(R.id.buttonReport);
-        btn_them_chi_tiet_pn = findViewById(R.id.btn_them_chi_tiet_pn);
+        setControl();
+
 
         txtTitle.setText("Thông tin vật tư nhập kho của phiếu số " + id);
 
-        nhapKhoHelper = NhapKhoHelper.getInstance(this);
 
-        recyclerView = findViewById(R.id.recyclerViewDeliveryProductList);
 
         adapter = new TableViewAdapter(getList(id));
 
@@ -92,6 +87,12 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         String finalId = id;
+        setEvent(finalId);
+
+
+    }
+
+    private void setEvent(String finalId) {
         buttonReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +116,16 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
                 dialogInsert();
             }
         });
+    }
 
+    private void setControl() {
+        radioButton1 = findViewById(R.id.rdInVatTu);
+        radioButton2 = findViewById(R.id.rdInPhieuNhap);
+        txtTitle = findViewById(R.id.txtTitle);
+        buttonReport = findViewById(R.id.buttonReport);
+        btn_them_chi_tiet_pn = findViewById(R.id.btn_them_chi_tiet_pn);
+        nhapKhoHelper = NhapKhoHelper.getInstance(this);
+        recyclerView = findViewById(R.id.recyclerViewDeliveryProductList);
     }
 
     public void dialogInsert() {

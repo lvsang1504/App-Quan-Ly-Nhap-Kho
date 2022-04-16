@@ -144,6 +144,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }else if (id == R.id.nav_vat_tu) {
             Intent intent = new Intent(this, VatTuActivity.class);
             startActivity(intent);
+        }else if (id == R.id.nav_chart) {
+            Intent intent = new Intent(this, ChartActivity.class);
+            startActivity(intent);
         }else if (id == R.id.nav_policy) {
             replaceFragment(new PolicyFragment());
         }

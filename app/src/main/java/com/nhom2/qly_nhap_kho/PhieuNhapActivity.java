@@ -64,12 +64,8 @@ public class PhieuNhapActivity extends AppCompatActivity {
                         {Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 PackageManager.PERMISSION_GRANTED);
 
-
-        spinnerKho = findViewById(R.id.spinner1);
-        recycleView = findViewById(R.id.recycleView);
-        txtTongPhieuNhap = findViewById(R.id.txtTongPhieuNhap);
-        floatingActionButton = findViewById(R.id.floatingActionButton);
-        editTextSearchPhieuNhap=findViewById(R.id.editTextSearchPhieuNhap);
+        setControl();
+        setEvent();
 
 
         ArrayList<Kho> arrayKho = new ArrayList<Kho>();
@@ -90,6 +86,10 @@ public class PhieuNhapActivity extends AppCompatActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTenKho);
         spinnerKho.setAdapter(arrayAdapter);
 
+
+    }
+
+    private void setEvent() {
         spinnerKho.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -115,6 +115,14 @@ public class PhieuNhapActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void setControl() {
+        spinnerKho = findViewById(R.id.spinner1);
+        recycleView = findViewById(R.id.recycleView);
+        txtTongPhieuNhap = findViewById(R.id.txtTongPhieuNhap);
+        floatingActionButton = findViewById(R.id.floatingActionButton);
+        editTextSearchPhieuNhap=findViewById(R.id.editTextSearchPhieuNhap);
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {

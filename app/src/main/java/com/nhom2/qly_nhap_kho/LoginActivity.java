@@ -27,16 +27,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setControl();
+        setEvent();
 
 
-        helper = NhapKhoHelper.getInstance(this);
-        preferenceManager = new PreferenceManager(getApplicationContext());
         if (preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
 
+
+
+
+    }
+
+    private void setEvent() {
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,11 +64,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void setControl() {
+        helper = NhapKhoHelper.getInstance(this);
+        preferenceManager = new PreferenceManager(getApplicationContext());
         buttonSignIn = findViewById(R.id.buttonSignIn);
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);

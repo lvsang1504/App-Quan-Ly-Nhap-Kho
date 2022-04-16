@@ -45,17 +45,17 @@ public class VatTuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vat_tu);
         nhapKhoHelper = NhapKhoHelper.getInstance(this);
-        anhXa();
+        setControl();
         actionGetData();
-
-
+        setEvent();
+    }
+    private void setEvent() {
         floatingActionButtonVatTu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogInsert();
             }
         });
-//        editTextSearchVatTu.onKeyDown()
         editTextSearchVatTu.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -65,9 +65,7 @@ public class VatTuActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    private void anhXa() {
+    private void setControl() {
         recyclerViewVatTu = findViewById(R.id.recyclerViewVatTu);
         floatingActionButtonVatTu=findViewById(R.id.floatingActionButtonVatTu);
         editTextSearchVatTu=findViewById(R.id.editTextSearchVatTu);
