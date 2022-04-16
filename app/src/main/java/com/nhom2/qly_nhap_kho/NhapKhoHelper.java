@@ -80,7 +80,7 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE IF NOT EXISTS PhieuNhap" +
                 "(SoPhieu INTEGER PRIMARY KEY" +
-                ",NgayLap VARCHAR" +
+                ",NgayLap DATE" +
                 ",MaKho VARCHAR(5)" +
                 ", FOREIGN KEY (MaKho)" +
                 " REFERENCES Kho (MaKho)" +
@@ -117,11 +117,19 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','a','1')");
 
         //Them du lieu phieu nhap
-        db.execSQL("INSERT INTO PhieuNhap VALUES (1,'20/06/2013', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (2,'07/07/2013', 'K2')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (3,'02/01/2014', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (4,'05/03/2014', 'K3')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (5,'25/05/2014', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (1,'2022-04-16', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (2,'2022-04-16', 'K2')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (3,'2022-04-16', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (4,'2022-04-16', 'K3')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (5,'2022-04-16', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (6,'2022-04-16', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (7,'2022-04-16', 'K2')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (8,'2022-04-16', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (9,'2022-04-16', 'K3')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (10,'2022-04-16', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (11,'2022-04-16', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (12,'2022-04-16', 'K3')");
+
 
         //Them du lieu chi tiet phieu nhap
         db.execSQL("INSERT INTO ChiTietPhieuNhap VALUES (1,'GO', 'Viên', '5000')");
