@@ -30,7 +30,7 @@
                 android:textSize="20sp"
                 android:textStyle="normal"
                 android:layout_weight="8"
-                android:gravity="left"/>
+                android:gravity="center_vertical"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

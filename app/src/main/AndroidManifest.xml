@@ -41,6 +41,9 @@
             android:exported="false"
             android:theme="@style/Theme.Qly_nhap_kho" />
         <activity
+            android:name=".ChiTietBaoCao4Activity"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietBaoCao3Activity"
             android:exported="false" />
         <activity

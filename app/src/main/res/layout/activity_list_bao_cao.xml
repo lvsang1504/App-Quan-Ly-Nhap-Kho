@@ -12,12 +12,13 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/dashbord_bacground" />
+
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:onClick="btnClick"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,12 +42,14 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:text="Báo cáo"
         android:textAllCaps="true"
-        android:textColor="@color/teal_700"
+        android:textColor="#222"
         android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

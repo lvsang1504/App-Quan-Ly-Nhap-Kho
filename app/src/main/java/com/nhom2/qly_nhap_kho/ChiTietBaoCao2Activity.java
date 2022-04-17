@@ -25,9 +25,9 @@ public class ChiTietBaoCao2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_bao_cao2);
 
-
-        TableViewAdapterBaoCao2 tableViewAdapterBaoCao2 = new TableViewAdapterBaoCao2(getList());
         setControl();
+        nhapKhoHelper = new NhapKhoHelper(this);
+        TableViewAdapterBaoCao2 tableViewAdapterBaoCao2 = new TableViewAdapterBaoCao2(getList());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -38,7 +38,6 @@ public class ChiTietBaoCao2Activity extends AppCompatActivity {
 
 
     private void setControl() {
-        nhapKhoHelper = new NhapKhoHelper(this);
         recyclerView = findViewById(R.id.recyclerViewBaoCao2);
     }
 

@@ -1,18 +1,16 @@
 package com.nhom2.qly_nhap_kho;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.nhom2.qly_nhap_kho.adapter.BaoCaoAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListBaoCaoActivity extends AppCompatActivity {
 
@@ -28,7 +26,7 @@ public class ListBaoCaoActivity extends AppCompatActivity {
         arrayBaoCao.add("Danh sách kho nhập nhiều loại vật tư nhất");
         arrayBaoCao.add("Danh sách các kho chưa nhập vật tư năm 2014");
         arrayBaoCao.add("Danh sách các phiếu nhập có cả Gạch ống và Gạch thẻ");
-
+        arrayBaoCao.add("Tổng số lượng nhập của từng loại vật tư");
 
         setControl();
         actionGetData();
@@ -39,20 +37,22 @@ public class ListBaoCaoActivity extends AppCompatActivity {
         listViewBaoCao.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {//bao cao so 1
+                if (i == 0) {
                     Intent intent = new Intent(ListBaoCaoActivity.this, ChiTietBaoCao1Activity.class);
                     startActivity(intent);
                 }
-                if (i == 1) {//bao cao so 2
+                if (i == 1) {
                     Intent intent = new Intent(ListBaoCaoActivity.this, ChiTietBaoCao2Activity.class);
                     startActivity(intent);
                 }
-                if (i == 2) {//bao cao so 3
+                if (i == 2) {
                     Intent intent = new Intent(ListBaoCaoActivity.this, ChiTietBaoCao3Activity.class);
                     startActivity(intent);
-
                 }
-
+                if (i == 3) {
+                    Intent intent = new Intent(ListBaoCaoActivity.this, ChiTietBaoCao4Activity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
