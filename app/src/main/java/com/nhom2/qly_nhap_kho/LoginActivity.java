@@ -3,6 +3,7 @@ package com.nhom2.qly_nhap_kho;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 
 import com.google.android.material.button.MaterialButton;
+import com.nhom2.qly_nhap_kho.model.Kho;
 import com.nhom2.qly_nhap_kho.model.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,11 +23,12 @@ public class LoginActivity extends AppCompatActivity {
     MaterialButton buttonSignIn;
     EditText inputEmail, inputPassword;
     private PreferenceManager preferenceManager;
-
+    NhapKhoHelper nhapKhoHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        nhapKhoHelper = NhapKhoHelper.getInstance(this);
         setControl();
         setEvent();
 
@@ -92,13 +95,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void forgotPassword(View view) {
-        if(inputEmail.getText().toString().isEmpty()){
+
+        String email=inputEmail.getText().toString();
+        if(email.isEmpty()){
             Toast.makeText(LoginActivity.this, "Enter email", Toast.LENGTH_LONG).show();
             return;
         }
-        Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
-        intent.putExtra("gmail",inputEmail.getText().toString());
-        Log.d("gmail",inputEmail.getText().toString());
-        startActivity(intent);
+
+        Cursor data= nhapKhoHelper.GetData("SELECT * FROM User WHERE EMAIL='"+email+"'");
+        while (data.moveToNext()) {
+            Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
+            intent.putExtra("gmail",inputEmail.getText().toString());
+            Log.d("gmail",inputEmail.getText().toString());
+            startActivity(intent);
+        }
+        Toast.makeText(LoginActivity.this, "Email not exist", Toast.LENGTH_LONG).show();
+
     }
 }
