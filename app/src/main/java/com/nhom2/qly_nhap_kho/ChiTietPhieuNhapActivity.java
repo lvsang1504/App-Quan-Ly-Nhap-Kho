@@ -119,8 +119,6 @@ public class ChiTietPhieuNhapActivity extends AppCompatActivity {
     }
 
     private void setControl() {
-        radioButton1 = findViewById(R.id.rdInVatTu);
-        radioButton2 = findViewById(R.id.rdInPhieuNhap);
         txtTitle = findViewById(R.id.txtTitle);
         buttonReport = findViewById(R.id.buttonReport);
         btn_them_chi_tiet_pn = findViewById(R.id.btn_them_chi_tiet_pn);

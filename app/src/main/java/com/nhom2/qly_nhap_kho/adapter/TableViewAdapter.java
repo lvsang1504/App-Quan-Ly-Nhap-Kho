@@ -66,7 +66,7 @@ public class TableViewAdapter extends RecyclerView.Adapter {
             rowViewHolder.txtSL.setBackgroundResource(R.drawable.table_content_cell_bg);
 
             rowViewHolder.txtMaVt.setText(modal.maVT + "");
-            rowViewHolder.txtTenVT.setText(modal.tenVT);
+            rowViewHolder.txtTenVT.setText(modal.tenVT+"");
             rowViewHolder.txtDvt.setText(modal.DVT + "");
             rowViewHolder.txtSL.setText(modal.soLuong + "");
         }
