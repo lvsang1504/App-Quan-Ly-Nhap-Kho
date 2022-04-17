@@ -57,6 +57,7 @@
                     android:text="Mã vật tư" />
 
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/editSuaMaVatTu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

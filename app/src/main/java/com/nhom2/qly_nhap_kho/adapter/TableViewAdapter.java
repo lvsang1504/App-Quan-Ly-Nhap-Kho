@@ -17,10 +17,6 @@ import com.nhom2.qly_nhap_kho.dao.TableData;
 
 import java.util.List;
 
-/**
- * Created by Azhar Rivaldi on 03/11/2019.
- */
-
 public class TableViewAdapter extends RecyclerView.Adapter {
 
     private List<TableData> list;
@@ -54,7 +50,7 @@ public class TableViewAdapter extends RecyclerView.Adapter {
             rowViewHolder.txtSL.setBackgroundResource(R.drawable.table_header_cell_bg);
 
             rowViewHolder.txtMaVt.setText("Mã VT");
-            rowViewHolder.txtTenVT.setText("Tên VT");
+            rowViewHolder.txtTenVT.setText("Vat Tu");
             rowViewHolder.txtDvt.setText("Đơn vị tính");
             rowViewHolder.txtSL.setText("Số lượng");
         } else {

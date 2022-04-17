@@ -172,7 +172,6 @@ public class KhoActivity extends AppCompatActivity {
         TextView btnThem = dialog.findViewById(R.id.btnThemKho);
         TextView btnHuy = dialog.findViewById(R.id.btnHuyKho);
 
-
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
