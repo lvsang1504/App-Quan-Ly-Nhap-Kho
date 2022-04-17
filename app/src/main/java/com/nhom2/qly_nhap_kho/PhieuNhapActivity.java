@@ -144,12 +144,13 @@ public class PhieuNhapActivity extends AppCompatActivity {
                 Toast.makeText(PhieuNhapActivity.this, "Phiếu nhập có vật tư nên không thể xóa", Toast.LENGTH_SHORT).show();
                 return;
             }
-            Toast.makeText(PhieuNhapActivity.this, "Xóa thành công " + arrayPhieuNhap.get(position).getSoPhieu(), Toast.LENGTH_SHORT).show();
+
             //Remove swiped item from list and notify the RecyclerView
 
             helper.QueryData("DELETE FROM PhieuNhap WHERE SoPhieu='" + arrayPhieuNhap.get(position).getSoPhieu() + "'");
             arrayPhieuNhap.remove(position);
             phieuNhapAdapter.notifyDataSetChanged();
+            Toast.makeText(PhieuNhapActivity.this, "Xóa thành công " + arrayPhieuNhap.get(position).getSoPhieu(), Toast.LENGTH_SHORT).show();
         }
 
         @Override

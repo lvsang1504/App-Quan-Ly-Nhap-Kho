@@ -32,15 +32,15 @@ import com.nhom2.qly_nhap_kho.utils.CustomTypefaceSpan;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
+
     DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        setContentView(R.layout.activity_main);
 
         setupToolbar(R.id.toolbar, "COOK IT", R.color.white, R.color.main_color1, R.drawable.ic_round_add);
 
@@ -55,29 +55,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        //truyen hinh anh do
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
         View header = navigationView.getHeaderView(0);
         ImageView imageView = (ImageView) header.findViewById(R.id.profilepic);
         Glide.with(this)
                 .load(Uri.parse("https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"))
-//                .transform(new CircleGlide(this))
                 .into(imageView);
-//        setSupportActionBar(binding.appBarMain.toolbar);
-//        DrawerLayout drawer = binding.drawerLayout;
-//        NavigationView navigationView = binding.navView;
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home, R.id.nav_login, R.id.nav_policy)
-//                .setOpenableLayout(drawer)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
 

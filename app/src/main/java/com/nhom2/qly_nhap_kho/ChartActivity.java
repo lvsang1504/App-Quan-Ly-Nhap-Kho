@@ -50,7 +50,7 @@ public class ChartActivity extends AppCompatActivity {
         getBarEntries();
 
         // creating a new bar data set.
-        barDataSet = new BarDataSet(barEntriesArrayList, "labels");
+        barDataSet = new BarDataSet(barEntriesArrayList, "");
 
         // creating a new bar data and
         // passing our bar data set.
@@ -69,7 +69,7 @@ public class ChartActivity extends AppCompatActivity {
 
         // setting text size
         barDataSet.setValueTextSize(16f);
-        barChart.getDescription().setEnabled(true);
+        barChart.getDescription().setEnabled(false);
     }
 
     private void getBarEntries() {

@@ -117,18 +117,18 @@ public class NhapKhoHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','a','1')");
 
         //Them du lieu phieu nhap
-        db.execSQL("INSERT INTO PhieuNhap VALUES (1,'2022-04-16', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (2,'2022-04-16', 'K2')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (3,'2022-04-16', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (4,'2022-04-16', 'K3')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (5,'2022-04-16', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (6,'2022-04-16', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (7,'2022-04-16', 'K2')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (8,'2022-04-16', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (9,'2022-04-16', 'K3')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (10,'2022-04-16', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (11,'2022-04-16', 'K1')");
-        db.execSQL("INSERT INTO PhieuNhap VALUES (12,'2022-04-16', 'K3')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (1,'2022-04-17', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (2,'2022-04-17', 'K2')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (3,'2022-04-17', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (4,'2022-04-17', 'K3')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (5,'2022-04-17', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (6,'2022-04-17', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (7,'2022-04-17', 'K2')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (8,'2022-04-17', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (9,'2022-04-17', 'K3')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (10,'2022-04-17', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (11,'2022-04-17', 'K1')");
+        db.execSQL("INSERT INTO PhieuNhap VALUES (12,'2022-04-17', 'K3')");
 
 
         //Them du lieu chi tiet phieu nhap
