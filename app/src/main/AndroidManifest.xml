@@ -17,15 +17,19 @@
             android:exported="false" />
         <activity
             android:name=".NewPasswordActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".OTPActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
@@ -39,7 +43,11 @@
         <activity
             android:name=".KhoActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustNothing"
             android:theme="@style/Theme.Qly_nhap_kho" />
+        <activity
+            android:name=".ChiTietBaoCao4Activity"
+            android:exported="false" />
         <activity
             android:name=".ChiTietBaoCao3Activity"
             android:exported="false" />
@@ -54,12 +62,15 @@
             android:exported="false" />
         <activity
             android:name=".VatTuActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".PhieuNhapActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".ChiTietPhieuNhapActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

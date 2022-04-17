@@ -29,14 +29,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewKho"
-        android:layout_width="392dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.828" />
 
     <TextView
@@ -110,13 +109,11 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="357dp"
-        android:layout_height="151dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/search_back"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSearchKho"
-         />
+        app:srcCompat="@drawable/store" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,17 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/background_button_no.xml" value="0.214" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/background_button_yes.xml" value="0.214" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/background_image.xml" value="0.129" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/border_edit.xml" value="0.214" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/custom_rectangle.xml" value="0.1" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/dialog_card.xml" value="0.176" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/ic_phieu_nhap.xml" value="0.1" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/search_back.xml" value="0.1425" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/splash_screen_bg.xml" value="0.132" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_chart.xml" value="0.12158054711246201" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_chi_tiet_phieu_nhap.xml" value="0.25" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_home.xml" value="0.10989583333333333" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_kho.xml" value="0.264" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_list_bao_cao.xml" value="0.12158054711246201" />
@@ -25,14 +19,7 @@
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_vat_tu.xml" value="0.12158054711246201" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/content_main.xml" value="0.1" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/custom_pinner.xml" value="0.4" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/dialog_suakho.xml" value="0.25" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/dialog_suaphieunhap.xml" value="0.25" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/dialog_suavattu.xml" value="0.12158054711246201" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/dialog_themchitietphieunhap.xml" value="0.25" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/dialog_themkho.xml" value="0.264" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/dialog_themphieunhap.xml" value="0.2" />
-        <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/dialog_themvattu.xml" value="0.25" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/fragment_kho.xml" value="0.1" />
         <entry key="..\:/Qly_nhap_kho/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/fragment_policy.xml" value="0.1" />
@@ -120,13 +107,24 @@
         <entry key="..\:/Tailieu/Lap trinh di dong/GiuaKy/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/table_list_item_bao_cao3.xml" value="0.2418478260869565" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/table_content_cell_bg.xml" value="0.136" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/drawable/table_header_cell_bg.xml" value="0.136" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_chart.xml" value="0.3458333333333333" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_chi_tiet_bao_cao1.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_chi_tiet_bao_cao2.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_chi_tiet_bao_cao3.xml" value="0.23324275362318841" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_chi_tiet_bao_cao4.xml" value="0.33" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_list_bao_cao.xml" value="0.23143115942028986" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_phieu_nhap.xml" value="0.18659420289855072" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/activity_vat_tu.xml" value="0.1" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/app_bar_main.xml" value="0.1762917933130699" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/dialog_themkho.xml" value="0.33" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/fragment_policy.xml" value="0.67" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/grid_item_layout.xml" value="0.16869300911854104" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/list_bao_cao.xml" value="0.16869300911854104" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/list_kho.xml" value="0.1762917933130699" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/table_list_item_bao_cao1.xml" value="0.33" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/table_list_item_bao_cao2.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/table_list_item_bao_cao3.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/thuan/Desktop/Project/qlnk-mobile/App-Quan-Ly-Nhap-Kho/app/src/main/res/layout/table_list_item_bao_cao4.xml" value="0.346875" />
       </map>
     </option>
   </component>
