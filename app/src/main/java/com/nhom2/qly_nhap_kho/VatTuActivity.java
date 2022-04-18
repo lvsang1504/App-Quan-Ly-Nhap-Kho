@@ -105,7 +105,7 @@ public class VatTuActivity extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < arrayVatTu.size(); i++) {
-                    if(maVT==arrayVatTu.get(i).getMaVT()){
+                    if(maVT.equals(arrayVatTu.get(i).getMaVT())){
                         Toast.makeText(VatTuActivity.this, "Mã vật tư bị trùng", Toast.LENGTH_SHORT).show();
 
                         return;
@@ -209,15 +209,15 @@ public class VatTuActivity extends AppCompatActivity {
             Cursor data = nhapKhoHelper.GetData("SELECT * FROM ChiTietPhieuNhap WHERE MaVT='" + arrayVatTu.get(position).getMaVT() + "'");
             while (data.moveToNext()) {
                 Toast.makeText(VatTuActivity.this, "Vật tư đã có trong chi tiết không thể xóa", Toast.LENGTH_SHORT).show();
+                vatTuAdapter.notifyDataSetChanged();
                 return;
             }
-            Toast.makeText(VatTuActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
             //Remove swiped item from list and notify the RecyclerView
-
-
             nhapKhoHelper.QueryData("DELETE FROM VatTu WHERE MaVT='" + arrayVatTu.get(position).getMaVT() + "'");
             arrayVatTu.remove(position);
             vatTuAdapter.notifyDataSetChanged();
+            Toast.makeText(VatTuActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+
         }
 
         @Override
