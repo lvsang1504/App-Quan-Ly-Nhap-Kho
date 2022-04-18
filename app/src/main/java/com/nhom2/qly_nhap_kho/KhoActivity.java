@@ -290,7 +290,7 @@ public class KhoActivity extends AppCompatActivity {
         String searchKho = editTextSearchKho.getText().toString();
         Cursor dataKho;
         if (searchKho != "") {
-            dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho WHERE TenKho LIKE '%" + searchKho + "%'");
+            dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho WHERE TenKho LIKE '%" + searchKho + "%' OR MaKho LIKE '%" + searchKho + "%'");
         } else {
             dataKho = nhapKhoHelper.GetData("SELECT * FROM Kho");
         }

@@ -280,7 +280,7 @@ public class VatTuActivity extends AppCompatActivity {
         String searchVatTu=editTextSearchVatTu.getText().toString();
         Cursor dataVatTu;
         if(searchVatTu!=""){
-            dataVatTu = nhapKhoHelper.GetData("SELECT * FROM VatTu WHERE TenVT LIKE '%"+searchVatTu+"%'");
+            dataVatTu = nhapKhoHelper.GetData("SELECT * FROM VatTu WHERE TenVT LIKE '%"+searchVatTu+"%' OR MaVT LIKE '%"+searchVatTu+"%' OR XuatXu LIKE '%"+searchVatTu+"%'");
         }else{
             dataVatTu = nhapKhoHelper.GetData("SELECT * FROM VatTu");
         }

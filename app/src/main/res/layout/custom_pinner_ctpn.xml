@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/depot_30px"/>
+        android:src="@drawable/shopping_30px"/>
     <TextView
         android:id="@+id/txt_spinner_content"
         android:layout_width="wrap_content"

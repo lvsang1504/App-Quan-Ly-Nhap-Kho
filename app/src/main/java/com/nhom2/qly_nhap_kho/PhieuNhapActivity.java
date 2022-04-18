@@ -212,7 +212,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
         if (spinnerKho.getSelectedItem().toString().equals("Tất cả")) {
             Cursor dataPhieuNhap;
             if(searchPN!=""){
-                dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap WHERE SoPhieu LIKE '%"+searchPN+"%'");
+                dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap WHERE SoPhieu LIKE '%"+searchPN+"%' OR NgayLap LIKE '%"+searchPN+"%' OR MaKho LIKE '%"+searchPN+"%'");
             }else{
                 dataPhieuNhap = helper.GetData("SELECT * FROM PhieuNhap ");
                 txtTongPhieuNhap.setText("Tổng số phiếu nhập: " + arrayPhieuNhap.size());
@@ -285,12 +285,15 @@ public class PhieuNhapActivity extends AppCompatActivity {
         Spinner spinnerMaKho = dialog.findViewById(R.id.spinnerMaKho);
         Cursor dataKho = helper.GetData("SELECT * FROM Kho");
         ArrayList<String> arrayMaKhoTam = new ArrayList<String>();
+        ArrayList<String> arrayTenKhoTam = new ArrayList<String>();
         Kho khoTam;
         while (dataKho.moveToNext()) {
             khoTam = new Kho(dataKho.getString(0), dataKho.getString(1));
             arrayMaKhoTam.add(khoTam.getMaKho());
+            arrayTenKhoTam.add(khoTam.getTenKho());
         }
-        ArrayAdapter arrayAdapterTam = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayMaKhoTam);
+        //ArrayAdapter arrayAdapterTam = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayMaKhoTam);
+        SpinnerKhoAdapter arrayAdapterTam=new SpinnerKhoAdapter(this,R.layout.custom_pinner,arrayTenKhoTam);
         spinnerMaKho.setAdapter(arrayAdapterTam);
 
         //set du lieu
@@ -304,7 +307,7 @@ public class PhieuNhapActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String ngayLapMoi = String.valueOf(editNgayLap.getText());
-                String maKhoMoi = spinnerMaKho.getSelectedItem().toString();
+                String maKhoMoi = arrayMaKhoTam.get(spinnerMaKho.getSelectedItemPosition()).toString();
                 if (TextUtils.isEmpty(ngayLapMoi) || TextUtils.isEmpty(maKhoMoi)) {
                     Toast.makeText(PhieuNhapActivity.this, "Nội dung cần sửa chưa được nhập", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -355,7 +358,8 @@ public class PhieuNhapActivity extends AppCompatActivity {
             arrayTam.add(khoTam);
             arrayTenKhoTam.add(khoTam.getTenKho());
         }
-        ArrayAdapter arrayAdapterTam = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTenKhoTam);
+        //ArrayAdapter arrayAdapterTam = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTenKhoTam);
+        SpinnerKhoAdapter arrayAdapterTam=new SpinnerKhoAdapter(this,R.layout.custom_pinner,arrayTenKhoTam);
         spinnerMaKho2.setAdapter(arrayAdapterTam);
 
         btnThem.setOnClickListener(new View.OnClickListener() {
